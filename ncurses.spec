@@ -1,7 +1,7 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
 Version:    6.0
-Release:    32
+Release:    33
 Group:      System/Libraries
 License:    MIT
 URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
@@ -55,6 +55,14 @@ Group:      Libraries
 Requires:   ncurses-data
 
 %description lib-narrow
+Library files for the ncurses package
+
+%package lib-plusplus
+Summary:    C++ components for the ncurses package
+Group:      Libraries
+Requires:   ncurses-data
+
+%description lib-plusplus
 Library files for the ncurses package
 
 %package data
@@ -189,6 +197,13 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT%{_libdir}/libcursesw.so
 /usr/bin/ncurses6-config
 /usr/lib/terminfo
 
+%files lib-plusplus
+%defattr(-,root,root,-)
+/usr/lib64/libncurses++.so.6
+/usr/lib64/libncurses++.so.6.0
+/usr/lib64/libncurses++w.so.6
+/usr/lib64/libncurses++w.so.6.0
+
 
 %files lib-narrow
 %defattr(-,root,root,-)
@@ -197,8 +212,6 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT%{_libdir}/libcursesw.so
 /usr/lib64/libform.so.6.0
 /usr/lib64/libmenu.so.6
 /usr/lib64/libmenu.so.6.0
-/usr/lib64/libncurses++.so.6
-/usr/lib64/libncurses++.so.6.0
 /usr/lib64/libncurses.so.6
 /usr/lib64/libncurses.so.6.0
 /usr/lib64/libpanel.so.6
@@ -217,8 +230,6 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT%{_libdir}/libcursesw.so
 /usr/lib64/libncursesw.so.*
 /usr/lib64/libpanelw.so.*
 /usr/lib64/libtinfow.so.*
-/usr/lib64/libncurses++w.so.6
-/usr/lib64/libncurses++w.so.6.0
 
 %files data
 %defattr(-,root,root,-)
