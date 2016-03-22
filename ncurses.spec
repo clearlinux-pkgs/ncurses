@@ -1,7 +1,7 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
 Version:    6.0
-Release:    33
+Release:    34
 Group:      System/Libraries
 License:    MIT
 URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
@@ -318,6 +318,14 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT%{_libdir}/libcursesw.so
 /usr/share/terminfo/p/putty
 /usr/share/terminfo/p/putty-256color
 /usr/share/terminfo/p/putty-vt100
+/usr/share/terminfo/p/putty+fnkeys
+/usr/share/terminfo/p/putty+fnkeys+esc
+/usr/share/terminfo/p/putty+fnkeys+linux
+/usr/share/terminfo/p/putty+fnkeys+sco
+/usr/share/terminfo/p/putty+fnkeys+vt100
+/usr/share/terminfo/p/putty+fnkeys+vt400
+/usr/share/terminfo/p/putty+fnkeys+xterm
+/usr/share/terminfo/p/putty-sco
 /usr/share/terminfo/s/screen
 /usr/share/terminfo/s/screen+fkeys
 /usr/share/terminfo/s/screen-16color
@@ -2903,14 +2911,6 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT%{_libdir}/libcursesw.so
 /usr/share/terminfo/p/pccon-m
 /usr/share/terminfo/p/pccon0
 /usr/share/terminfo/p/pccon0-m
-/usr/share/terminfo/p/putty+fnkeys
-/usr/share/terminfo/p/putty+fnkeys+esc
-/usr/share/terminfo/p/putty+fnkeys+linux
-/usr/share/terminfo/p/putty+fnkeys+sco
-/usr/share/terminfo/p/putty+fnkeys+vt100
-/usr/share/terminfo/p/putty+fnkeys+vt400
-/usr/share/terminfo/p/putty+fnkeys+xterm
-/usr/share/terminfo/p/putty-sco
 /usr/share/terminfo/s/screen+italics
 /usr/share/terminfo/s/screen.konsole-256color
 /usr/share/terminfo/s/screen.mlterm-256color
