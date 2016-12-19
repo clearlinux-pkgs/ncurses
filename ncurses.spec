@@ -1,7 +1,7 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
 Version:    6.0
-Release:    37
+Release:    38
 Group:      System/Libraries
 License:    MIT
 URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
@@ -11,7 +11,13 @@ Requires:   ncurses-data
 Requires:   ncurses-data-rare
 Requires:   ncurses-docs
 Requires:   ncurses-lib
-BuildRequires:  python-dev pkg-config-dev
+BuildRequires :  python-dev pkg-config-dev
+BuildRequires : gcc-dev32
+BuildRequires : gcc-libgcc32
+BuildRequires : gcc-libstdc++32
+BuildRequires : glibc-dev32
+BuildRequires : glibc-libc32
+
 
 
 %description
@@ -32,6 +38,17 @@ Requires:   ncurses-lib-narrow
 %description dev
 Development files for the ncurses package
 
+%package dev32
+Summary:    Development components for the ncurses package
+Group:      Development/Libraries
+Requires:   %{name} = %{version}-%{release}
+Requires:   ncurses-lib
+Requires:   ncurses-lib32
+Requires:   ncurses-lib-narrow
+
+%description dev32
+Development files for the ncurses package
+
 %package bin
 Summary:    Binary components for the ncurses package
 Group:      Libraries
@@ -46,6 +63,14 @@ Group:      Libraries
 Requires:   ncurses-data
 
 %description lib
+Library files for the ncurses package
+
+%package lib32
+Summary:    Library components for the ncurses package
+Group:      Libraries
+Requires:   ncurses-data
+
+%description lib32
 Library files for the ncurses package
 
 
@@ -89,6 +114,9 @@ Documentation files for the ncurses package
 
 %prep
 %setup -q -n ncurses-6.0
+pushd ..
+cp -a ncurses-6.0 build32
+popd
 
 # >> setup
 # << setup
@@ -105,6 +133,17 @@ export CFLAGS="$CFLAGS -Os -ffunction-sections"
 
 make V=1 -j8
 
+pushd ../build32
+export CFLAGS="$CFLAGS -m32"
+export CXXFLAGS="$CXXFLAGS -m32"
+%configure --disable-static \
+    --with-shared --with-termlib --with-progs --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib64/pkgconfig   --with-versioned-syms --libdir=/usr/lib32
+
+
+make V=1 -j8
+popd
+
+
 # >> build post
 # << build post
 %install
@@ -112,6 +151,11 @@ rm -rf %{buildroot}
 # >> install pre
 # << install pre
 %make_install
+
+pushd ../build32
+%make_install32
+popd
+
 export PKG_CONFIG_LIBDIR=/usr/lib64/pkgconfig
 make clean
 
@@ -123,6 +167,7 @@ mkdir %{buildroot}/usr/lib
 
 make V=1 -j8
 %make_install
+
 
 # >> install post
 # << install post
@@ -179,6 +224,13 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT%{_libdir}/libcursesw.so
 # >> files dev
 # << files dev
 
+%files dev32
+%defattr(-,root,root,-)
+/usr/lib32/*.so
+
+# >> files dev
+# << files dev
+
 %files bin
 %defattr(-,root,root,-)
 #/usr/bin/ncursesw5-config
@@ -230,6 +282,17 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT%{_libdir}/libcursesw.so
 /usr/lib64/libncursesw.so.*
 /usr/lib64/libpanelw.so.*
 /usr/lib64/libtinfow.so.*
+
+
+%files lib32
+%defattr(-,root,root,-)
+/usr/lib32/libform.so.*
+/usr/lib32/libmenu.so.*
+/usr/lib32/libncurses.so.*
+/usr/lib32/libpanel.so.*
+/usr/lib32/libtinfo.so.*
+
+
 
 %files data
 %defattr(-,root,root,-)
