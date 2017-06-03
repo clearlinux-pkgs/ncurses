@@ -194,10 +194,10 @@ for l in $RPM_BUILD_ROOT/usr/lib64/libncurses.so; do
     echo "INPUT($soname -ltinfo)" > $l
 done
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/libcursesw.so
-rm -f $RPM_BUILD_ROOT%{_libdir}/libcurses.so
-echo "INPUT(-lncurses)" > $RPM_BUILD_ROOT%{_libdir}/libcurses.so
-echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT%{_libdir}/libcursesw.so
+rm -f $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
+rm -f $RPM_BUILD_ROOT/usr/lib64/libcurses.so
+echo "INPUT(-lncurses)" > $RPM_BUILD_ROOT/usr/lib64/libcurses.so
+echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 
 
 
