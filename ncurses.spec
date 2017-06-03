@@ -1,7 +1,7 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
 Version:    6.0
-Release:    39
+Release:    40
 Group:      System/Libraries
 License:    MIT
 URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
@@ -116,6 +116,8 @@ Documentation files for the ncurses package
 %setup -q -n ncurses-6.0
 pushd ..
 cp -a ncurses-6.0 build32
+cp -a ncurses-6.0 build32w
+cp -a ncurses-6.0 ncurses-6.0w
 popd
 
 # >> setup
@@ -125,7 +127,11 @@ popd
 # >> build pre
 # << build pre
 
-export CFLAGS="$CFLAGS -Os -ffunction-sections"
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition "
+
 
 %configure --disable-static \
     --with-shared --with-termlib --with-progs --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --with-cxx-shared --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib64/pkgconfig   --with-versioned-syms
@@ -133,11 +139,28 @@ export CFLAGS="$CFLAGS -Os -ffunction-sections"
 
 make V=1 -j8
 
+pushd ../ncurses-6.0w
+%configure --disable-static \
+    --with-shared --with-termlib --enable-widec --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --with-cxx-shared --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib64/pkgconfig   --with-versioned-syms
+
+make V=1 -j8
+popd
+
 pushd ../build32
 export CFLAGS="$CFLAGS -m32"
 export CXXFLAGS="$CXXFLAGS -m32"
 %configure --disable-static \
     --with-shared --with-termlib --with-progs --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib64/pkgconfig   --with-versioned-syms --libdir=/usr/lib32
+
+
+make V=1 -j8
+popd
+
+pushd ../build32w
+export CFLAGS="$CFLAGS -m32"
+export CXXFLAGS="$CXXFLAGS -m32"
+%configure --disable-static \
+    --with-shared --with-termlib --enable-widec --with-progs --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib64/pkgconfig   --with-versioned-syms --libdir=/usr/lib32
 
 
 make V=1 -j8
@@ -156,17 +179,15 @@ pushd ../build32
 %make_install32
 popd
 
-export PKG_CONFIG_LIBDIR=/usr/lib64/pkgconfig
-make clean
-
-%configure --disable-static \
-    --with-shared --with-termlib --enable-widec --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --with-cxx-shared --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib64/pkgconfig   --with-versioned-syms
-
+pushd ../build32w
+%make_install32
+popd
 
 mkdir %{buildroot}/usr/lib
 
-make V=1 -j8
+pushd ../ncurses-6.0w
 %make_install
+popd
 
 
 # >> install post
@@ -291,8 +312,16 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/lib32/libncurses.so.*
 /usr/lib32/libpanel.so.*
 /usr/lib32/libtinfo.so.*
-
-
+/usr/lib32/libformw.so.6
+/usr/lib32/libformw.so.6.0
+/usr/lib32/libmenuw.so.6
+/usr/lib32/libmenuw.so.6.0
+/usr/lib32/libncursesw.so.6
+/usr/lib32/libncursesw.so.6.0
+/usr/lib32/libpanelw.so.6
+/usr/lib32/libpanelw.so.6.0
+/usr/lib32/libtinfow.so.6
+/usr/lib32/libtinfow.so.6.0
 
 %files data
 %defattr(-,root,root,-)
