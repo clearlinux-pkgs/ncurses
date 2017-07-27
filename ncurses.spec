@@ -1,11 +1,12 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
 Version:    6.0
-Release:    41
+Release:    42
 Group:      System/Libraries
 License:    MIT
 URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
 Source0:    http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
+Patch1:     cve-2017-10685.nopatch
 Requires:   ncurses-bin
 Requires:   ncurses-data
 Requires:   ncurses-data-rare
