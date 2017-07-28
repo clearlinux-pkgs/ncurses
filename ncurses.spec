@@ -1,12 +1,13 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
-Version:    6.0
-Release:    42
+Version:    6.0.5
+Release:    43
 Group:      System/Libraries
 License:    MIT
 URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
 Source0:    http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
-Patch1:     cve-2017-10685.nopatch
+Patch1:     0001-Patch-v6-release-to-20160910-development.patch
+Patch2:     0002-Patch-20160910-development-to-20170722-development.patch
 Requires:   ncurses-bin
 Requires:   ncurses-data
 Requires:   ncurses-data-rare
@@ -115,12 +116,13 @@ Documentation files for the ncurses package
 
 %prep
 %setup -q -n ncurses-6.0
+%patch1 -p1
+%patch2 -p1
 pushd ..
 cp -a ncurses-6.0 build32
 cp -a ncurses-6.0 build32w
 cp -a ncurses-6.0 ncurses-6.0w
 popd
-
 # >> setup
 # << setup
 
@@ -378,6 +380,7 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/a/ansis
 /usr/share/terminfo/a/ansis-mono
 /usr/share/terminfo/a/ansisysk
+/usr/share/terminfo/a/ansiterm
 /usr/share/terminfo/a/ansiw
 /usr/share/terminfo/d/dec-vt100
 /usr/share/terminfo/d/dec-vt220
@@ -385,6 +388,11 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/d/dec-vt340
 /usr/share/terminfo/d/dec-vt400
 /usr/share/terminfo/d/decansi
+/usr/share/terminfo/d/dumb-emacs-ansi
+/usr/share/terminfo/d/dvtm
+/usr/share/terminfo/d/dvtm-256color
+/usr/share/terminfo/e/ecma+strikeout
+/usr/share/terminfo/f/fbterm
 /usr/share/terminfo/l/linux
 /usr/share/terminfo/l/linux-16color
 /usr/share/terminfo/l/linux-basic
@@ -394,9 +402,33 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/l/linux-koi8r
 /usr/share/terminfo/l/linux-lat
 /usr/share/terminfo/l/linux-m
+/usr/share/terminfo/l/linux-m1
+/usr/share/terminfo/l/linux-m1b
+/usr/share/terminfo/l/linux-m2
 /usr/share/terminfo/l/linux-nic
 /usr/share/terminfo/l/linux-vt
 /usr/share/terminfo/l/linux2.6.26
+/usr/share/terminfo/m/minitel1-nb
+/usr/share/terminfo/m/minitel12-80
+/usr/share/terminfo/m/minitel1b-nb
+/usr/share/terminfo/m/minitel2-80
+/usr/share/terminfo/n/nsterm-build361
+/usr/share/terminfo/p/pty
+/usr/share/terminfo/p/putty
+/usr/share/terminfo/p/putty+fnkeys
+/usr/share/terminfo/p/putty+fnkeys+esc
+/usr/share/terminfo/p/putty+fnkeys+linux
+/usr/share/terminfo/p/putty+fnkeys+sco
+/usr/share/terminfo/p/putty+fnkeys+vt100
+/usr/share/terminfo/p/putty+fnkeys+vt400
+/usr/share/terminfo/p/putty+fnkeys+xterm
+/usr/share/terminfo/p/putty-256color
+/usr/share/terminfo/p/putty-m1
+/usr/share/terminfo/p/putty-m1b
+/usr/share/terminfo/p/putty-m2
+/usr/share/terminfo/p/putty-noapp
+/usr/share/terminfo/p/putty-sco
+/usr/share/terminfo/p/putty-vt100
 /usr/share/terminfo/r/rxvt
 /usr/share/terminfo/r/rxvt+pcfkeys
 /usr/share/terminfo/r/rxvt-16color
@@ -407,18 +439,6 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/r/rxvt-cygwin
 /usr/share/terminfo/r/rxvt-cygwin-native
 /usr/share/terminfo/r/rxvt-xpm
-/usr/share/terminfo/p/pty
-/usr/share/terminfo/p/putty
-/usr/share/terminfo/p/putty-256color
-/usr/share/terminfo/p/putty-vt100
-/usr/share/terminfo/p/putty+fnkeys
-/usr/share/terminfo/p/putty+fnkeys+esc
-/usr/share/terminfo/p/putty+fnkeys+linux
-/usr/share/terminfo/p/putty+fnkeys+sco
-/usr/share/terminfo/p/putty+fnkeys+vt100
-/usr/share/terminfo/p/putty+fnkeys+vt400
-/usr/share/terminfo/p/putty+fnkeys+xterm
-/usr/share/terminfo/p/putty-sco
 /usr/share/terminfo/s/screen
 /usr/share/terminfo/s/screen+fkeys
 /usr/share/terminfo/s/screen-16color
@@ -443,8 +463,21 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/s/screen.gnome
 /usr/share/terminfo/s/screen.konsole
 /usr/share/terminfo/s/screen.linux
+/usr/share/terminfo/s/screen.linux-m1
+/usr/share/terminfo/s/screen.linux-m1b
+/usr/share/terminfo/s/screen.linux-m2
+/usr/share/terminfo/s/screen.minitel1
+/usr/share/terminfo/s/screen.minitel1-nb
+/usr/share/terminfo/s/screen.minitel12-80
+/usr/share/terminfo/s/screen.minitel1b
+/usr/share/terminfo/s/screen.minitel1b-80
+/usr/share/terminfo/s/screen.minitel1b-nb
+/usr/share/terminfo/s/screen.minitel2-80
 /usr/share/terminfo/s/screen.mlterm
 /usr/share/terminfo/s/screen.mrxvt
+/usr/share/terminfo/s/screen.putty-m1
+/usr/share/terminfo/s/screen.putty-m1b
+/usr/share/terminfo/s/screen.putty-m2
 /usr/share/terminfo/s/screen.rxvt
 /usr/share/terminfo/s/screen.teraterm
 /usr/share/terminfo/s/screen.vte
@@ -453,9 +486,15 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/s/screen.xterm-xfree86
 /usr/share/terminfo/s/screen2
 /usr/share/terminfo/s/screen3
+/usr/share/terminfo/t/tmux
+/usr/share/terminfo/t/tmux-256color
+/usr/share/terminfo/v/viewdata
+/usr/share/terminfo/v/viewdata-o
+/usr/share/terminfo/v/viewdata-rv
 /usr/share/terminfo/v/vt-utf8
 /usr/share/terminfo/v/vt100
 /usr/share/terminfo/v/vt100+
+/usr/share/terminfo/v/vt100+4bsd
 /usr/share/terminfo/v/vt100+enq
 /usr/share/terminfo/v/vt100+fnkeys
 /usr/share/terminfo/v/vt100+keypad
@@ -527,6 +566,7 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/v/vt510pcdos
 /usr/share/terminfo/v/vt52
 /usr/share/terminfo/v/vt520
+/usr/share/terminfo/v/vt520ansi
 /usr/share/terminfo/v/vt525
 /usr/share/terminfo/v/vt61
 /usr/share/terminfo/v/vt61.5
@@ -534,12 +574,16 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/v/vte+pcfkeys
 /usr/share/terminfo/v/vte-2007
 /usr/share/terminfo/v/vte-2008
+/usr/share/terminfo/v/vte-2012
+/usr/share/terminfo/v/vte-2014
 /usr/share/terminfo/v/vte-256color
 /usr/share/terminfo/x/xterm
 /usr/share/terminfo/x/xterm+256color
+/usr/share/terminfo/x/xterm+256setaf
 /usr/share/terminfo/x/xterm+88color
 /usr/share/terminfo/x/xterm+app
 /usr/share/terminfo/x/xterm+edit
+/usr/share/terminfo/x/xterm+kbs
 /usr/share/terminfo/x/xterm+noapp
 /usr/share/terminfo/x/xterm+pc+edit
 /usr/share/terminfo/x/xterm+pcc0
@@ -553,9 +597,19 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/x/xterm+r6f2
 /usr/share/terminfo/x/xterm+sl
 /usr/share/terminfo/x/xterm+sl-twm
+/usr/share/terminfo/x/xterm+sm+1002
+/usr/share/terminfo/x/xterm+sm+1003
+/usr/share/terminfo/x/xterm+sm+1005
+/usr/share/terminfo/x/xterm+sm+1006
+/usr/share/terminfo/x/xterm+tmux
 /usr/share/terminfo/x/xterm+vt+edit
+/usr/share/terminfo/x/xterm+x10mouse
+/usr/share/terminfo/x/xterm+x11hilite
+/usr/share/terminfo/x/xterm+x11mouse
 /usr/share/terminfo/x/xterm-1002
 /usr/share/terminfo/x/xterm-1003
+/usr/share/terminfo/x/xterm-1005
+/usr/share/terminfo/x/xterm-1006
 /usr/share/terminfo/x/xterm-16color
 /usr/share/terminfo/x/xterm-24
 /usr/share/terminfo/x/xterm-256color
@@ -577,6 +631,9 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/x/xterm-utf8
 /usr/share/terminfo/x/xterm-vt220
 /usr/share/terminfo/x/xterm-vt52
+/usr/share/terminfo/x/xterm-x10mouse
+/usr/share/terminfo/x/xterm-x11hilite
+/usr/share/terminfo/x/xterm-x11mouse
 /usr/share/terminfo/x/xterm-xf86-v32
 /usr/share/terminfo/x/xterm-xf86-v33
 /usr/share/terminfo/x/xterm-xf86-v333
@@ -590,26 +647,6 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/x/xtermm
 /usr/share/terminfo/x/xterms
 /usr/share/terminfo/x/xterms-sun
-/usr/share/terminfo/t/tmux
-/usr/share/terminfo/t/tmux-256color
-/usr/share/terminfo/v/vt520ansi
-/usr/share/terminfo/v/vte-2012
-/usr/share/terminfo/v/vte-2014
-/usr/share/terminfo/x/xterm+256setaf
-/usr/share/terminfo/x/xterm+kbs
-/usr/share/terminfo/x/xterm+sm+1002
-/usr/share/terminfo/x/xterm+sm+1003
-/usr/share/terminfo/x/xterm+sm+1005
-/usr/share/terminfo/x/xterm+sm+1006
-/usr/share/terminfo/x/xterm+tmux
-/usr/share/terminfo/x/xterm+x10mouse
-/usr/share/terminfo/x/xterm+x11hilite
-/usr/share/terminfo/x/xterm+x11mouse
-/usr/share/terminfo/x/xterm-1005
-/usr/share/terminfo/x/xterm-1006
-/usr/share/terminfo/x/xterm-x10mouse
-/usr/share/terminfo/x/xterm-x11hilite
-/usr/share/terminfo/x/xterm-x11mouse
 
 /usr/share/tabset/std
 /usr/share/tabset/stdcrt
