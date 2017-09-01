@@ -1,7 +1,7 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
 Version:    6.0.5
-Release:    43
+Release:    44
 Group:      System/Libraries
 License:    MIT
 URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
@@ -36,6 +36,7 @@ Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 Requires:   ncurses-lib
 Requires:   ncurses-lib-narrow
+Requires:   ncurses-lib-plusplus
 
 %description dev
 Development files for the ncurses package
