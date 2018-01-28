@@ -1,13 +1,11 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
-Version:    6.0.5
+Version:    6.1
 Release:    44
 Group:      System/Libraries
 License:    MIT
-URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
-Source0:    http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
-Patch1:     0001-Patch-v6-release-to-20160910-development.patch
-Patch2:     0002-Patch-20160910-development-to-20170722-development.patch
+URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.1.tar.gz
+Source0:    http://mirrors.kernel.org/gnu/ncurses/ncurses-6.1.tar.gz
 Requires:   ncurses-bin
 Requires:   ncurses-data
 Requires:   ncurses-data-rare
@@ -116,13 +114,11 @@ Documentation files for the ncurses package
 
 
 %prep
-%setup -q -n ncurses-6.0
-%patch1 -p1
-%patch2 -p1
+%setup -q -n ncurses-6.1
 pushd ..
-cp -a ncurses-6.0 build32
-cp -a ncurses-6.0 build32w
-cp -a ncurses-6.0 ncurses-6.0w
+cp -a ncurses-6.1 build32
+cp -a ncurses-6.1 build32w
+cp -a ncurses-6.1 ncurses-6.1w
 popd
 # >> setup
 # << setup
@@ -143,7 +139,7 @@ export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sect
 
 make V=1 -j8
 
-pushd ../ncurses-6.0w
+pushd ../ncurses-6.1w
 %configure --disable-static \
     --with-shared --with-termlib --enable-widec --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --with-cxx-shared --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib64/pkgconfig   --with-versioned-syms
 
@@ -189,7 +185,7 @@ popd
 
 mkdir %{buildroot}/usr/lib
 
-pushd ../ncurses-6.0w
+pushd ../ncurses-6.1w
 %make_install
 popd
 
@@ -277,24 +273,24 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 %files lib-plusplus
 %defattr(-,root,root,-)
 /usr/lib64/libncurses++.so.6
-/usr/lib64/libncurses++.so.6.0
+/usr/lib64/libncurses++.so.6.1
 /usr/lib64/libncurses++w.so.6
-/usr/lib64/libncurses++w.so.6.0
+/usr/lib64/libncurses++w.so.6.1
 
 
 %files lib-narrow
 %defattr(-,root,root,-)
 
 /usr/lib64/libform.so.6
-/usr/lib64/libform.so.6.0
+/usr/lib64/libform.so.6.1
 /usr/lib64/libmenu.so.6
-/usr/lib64/libmenu.so.6.0
+/usr/lib64/libmenu.so.6.1
 /usr/lib64/libncurses.so.6
-/usr/lib64/libncurses.so.6.0
+/usr/lib64/libncurses.so.6.1
 /usr/lib64/libpanel.so.6
-/usr/lib64/libpanel.so.6.0
+/usr/lib64/libpanel.so.6.1
 /usr/lib64/libtinfo.so.6
-/usr/lib64/libtinfo.so.6.0
+/usr/lib64/libtinfo.so.6.1
 
 
 # >> files bin
@@ -317,15 +313,15 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/lib32/libpanel.so.*
 /usr/lib32/libtinfo.so.*
 /usr/lib32/libformw.so.6
-/usr/lib32/libformw.so.6.0
+/usr/lib32/libformw.so.6.1
 /usr/lib32/libmenuw.so.6
-/usr/lib32/libmenuw.so.6.0
+/usr/lib32/libmenuw.so.6.1
 /usr/lib32/libncursesw.so.6
-/usr/lib32/libncursesw.so.6.0
+/usr/lib32/libncursesw.so.6.1
 /usr/lib32/libpanelw.so.6
-/usr/lib32/libpanelw.so.6.0
+/usr/lib32/libpanelw.so.6.1
 /usr/lib32/libtinfow.so.6
-/usr/lib32/libtinfow.so.6.0
+/usr/lib32/libtinfow.so.6.1
 
 %files data
 %defattr(-,root,root,-)
@@ -653,6 +649,33 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/tabset/stdcrt
 /usr/share/tabset/vt100
 /usr/share/tabset/vt300
+/usr/share/terminfo/a/ansi+idc1
+/usr/share/terminfo/e/ecma+italics
+/usr/share/terminfo/i/iTerm2.app
+/usr/share/terminfo/i/iterm2
+/usr/share/terminfo/i/iterm2-direct
+/usr/share/terminfo/k/konsole-direct
+/usr/share/terminfo/m/mlterm-direct
+/usr/share/terminfo/n/nsterm-build400
+/usr/share/terminfo/s/st-0.6
+/usr/share/terminfo/s/st-0.7
+/usr/share/terminfo/s/st-direct
+/usr/share/terminfo/t/teraterm-256color
+/usr/share/terminfo/t/teraterm4.97
+/usr/share/terminfo/t/terminology-0.6.1
+/usr/share/terminfo/t/terminology-1.0.0
+/usr/share/terminfo/t/termite
+/usr/share/terminfo/v/vte-2017
+/usr/share/terminfo/v/vte-direct
+/usr/share/terminfo/x/xterm+alt+title
+/usr/share/terminfo/x/xterm+alt1049
+/usr/share/terminfo/x/xterm+direct
+/usr/share/terminfo/x/xterm+direct2
+/usr/share/terminfo/x/xterm+indirect
+/usr/share/terminfo/x/xterm+noalt
+/usr/share/terminfo/x/xterm+titlestack
+/usr/share/terminfo/x/xterm-direct
+/usr/share/terminfo/x/xterm-direct2
 
 
 %files data-rare
