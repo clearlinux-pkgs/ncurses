@@ -1,7 +1,7 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
 Version:    6.1
-Release:    48
+Release:    49
 Group:      System/Libraries
 License:    MIT
 URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.1.tar.gz
@@ -150,7 +150,7 @@ pushd ../build32
 export CFLAGS="$CFLAGS -m32"
 export CXXFLAGS="$CXXFLAGS -m32"
 %configure --disable-static \
-    --with-shared --with-termlib --with-progs --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib64/pkgconfig   --with-versioned-syms --libdir=/usr/lib32
+    --with-shared --with-termlib --with-progs --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib32/pkgconfig   --with-versioned-syms --libdir=/usr/lib32
 
 
 make V=1 -j8
@@ -160,7 +160,7 @@ pushd ../build32w
 export CFLAGS="$CFLAGS -m32"
 export CXXFLAGS="$CXXFLAGS -m32"
 %configure --disable-static \
-    --with-shared --with-termlib --enable-widec --with-progs --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib64/pkgconfig   --with-versioned-syms --libdir=/usr/lib32
+    --with-shared --with-termlib --enable-widec --with-progs --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib32/pkgconfig   --with-versioned-syms --libdir=/usr/lib32
 
 
 make V=1 -j8
@@ -248,6 +248,7 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 %files dev32
 %defattr(-,root,root,-)
 /usr/lib32/*.so
+/usr/lib32/pkgconfig/*.pc
 
 # >> files dev
 # << files dev
