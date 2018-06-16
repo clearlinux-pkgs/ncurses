@@ -1,7 +1,7 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
 Version:    6.1
-Release:    50
+Release:    51
 Group:      System/Libraries
 License:    MIT
 URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.1.tar.gz
@@ -11,7 +11,7 @@ Requires:   ncurses-data
 Requires:   ncurses-data-rare
 Requires:   ncurses-docs
 Requires:   ncurses-lib
-BuildRequires :  python-dev pkg-config-dev
+BuildRequires :  python3-core pkg-config-dev
 BuildRequires : gcc-dev32
 BuildRequires : gcc-libgcc32
 BuildRequires : gcc-libstdc++32
