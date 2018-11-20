@@ -1,7 +1,7 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
 Version:    6.1
-Release:    51
+Release:    52
 Group:      System/Libraries
 License:    MIT
 URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.1.tar.gz
@@ -17,8 +17,23 @@ BuildRequires : gcc-libgcc32
 BuildRequires : gcc-libstdc++32
 BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
-
-
+Patch1: patch-20180129.patch
+Patch2: patch-20180203.patch
+Patch3: patch-20180210.patch
+Patch4: patch-20180217.patch
+Patch5: patch-20180224.patch
+Patch6: patch-20180303.patch
+Patch7: patch-20180317.patch
+Patch8: patch-20180324.patch
+Patch9: patch-20180331.patch
+Patch10: patch-20180407.patch
+Patch11: patch-20180414.patch
+Patch12: patch-20180428.patch
+Patch13: patch-20180505.patch
+Patch14: patch-20180512.patch
+Patch15: patch-20180519.patch
+Patch16: patch-20180526.patch
+Patch17: patch-20180602.patch
 
 %description
 See the file ANNOUNCE for a summary of ncurses features and ports.
@@ -115,6 +130,23 @@ Documentation files for the ncurses package
 
 %prep
 %setup -q -n ncurses-6.1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
+%patch16 -p1
+%patch17 -p1
 pushd ..
 cp -a ncurses-6.1 build32
 cp -a ncurses-6.1 build32w
