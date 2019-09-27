@@ -42,7 +42,6 @@ See the file NEWS for a release history and bug-fix notes.
 See the file TO-DO for things that still need doing, including known bugs.
 
 
-
 %package dev
 Summary:    Development components for the ncurses package
 Group:      Development/Libraries
@@ -152,28 +151,42 @@ cp -a ncurses-6.1 build32
 cp -a ncurses-6.1 build32w
 cp -a ncurses-6.1 ncurses-6.1w
 popd
-# >> setup
-# << setup
+
 
 %build
-# >> build pre
-# << build pre
-
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition "
 
-
 %configure --disable-static \
-    --with-shared --with-termlib --with-progs --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --with-cxx-shared --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib64/pkgconfig   --with-versioned-syms
-
+    --with-shared \
+    --with-termlib \
+    --with-progs \
+    --enable-pc-files \
+    --with-pkg-config=/usr/bin/pkg-config \
+    --with-abi-version=6 \
+    --with-cxx-shared \
+    --enable-const \
+    --enable-ext-colors \
+    --with-pkg-config-libdir=/usr/lib64/pkgconfig \
+    --with-versioned-syms
 
 make V=1 -j8
 
 pushd ../ncurses-6.1w
 %configure --disable-static \
-    --with-shared --with-termlib --enable-widec --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --with-cxx-shared --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib64/pkgconfig   --with-versioned-syms
+    --with-shared \
+    --with-termlib \
+    --enable-widec \
+    --enable-pc-files \
+    --with-pkg-config=/usr/bin/pkg-config \
+    --with-abi-version=6 \
+    --with-cxx-shared \
+    --enable-const \
+    --enable-ext-colors \
+    --with-pkg-config-libdir=/usr/lib64/pkgconfig \
+    --with-versioned-syms
 
 make V=1 -j8
 popd
@@ -182,8 +195,17 @@ pushd ../build32
 export CFLAGS="$CFLAGS -m32"
 export CXXFLAGS="$CXXFLAGS -m32"
 %configure --disable-static \
-    --with-shared --with-termlib --with-progs --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib32/pkgconfig   --with-versioned-syms --libdir=/usr/lib32
-
+    --with-shared \
+    --with-termlib \
+    --with-progs \
+    --enable-pc-files \
+    --with-pkg-config=/usr/bin/pkg-config \
+    --with-abi-version=6 \
+    --enable-const \
+    --enable-ext-colors \
+    --with-pkg-config-libdir=/usr/lib32/pkgconfig \
+    --with-versioned-syms \
+    --libdir=/usr/lib32
 
 make V=1 -j8
 popd
@@ -192,19 +214,25 @@ pushd ../build32w
 export CFLAGS="$CFLAGS -m32"
 export CXXFLAGS="$CXXFLAGS -m32"
 %configure --disable-static \
-    --with-shared --with-termlib --enable-widec --with-progs --enable-pc-files --with-pkg-config=/usr/bin/pkg-config --with-pkg-config=/usr/bin/pkg-config --with-abi-version=6 --enable-const --enable-ext-colors --with-pkg-config-libdir=/usr/lib32/pkgconfig   --with-versioned-syms --libdir=/usr/lib32
-
+    --with-shared \
+    --with-termlib \
+    --enable-widec \
+    --with-progs \
+    --enable-pc-files \
+    --with-pkg-config=/usr/bin/pkg-config \
+    --with-abi-version=6 \
+    --enable-const \
+    --enable-ext-colors \
+    --with-pkg-config-libdir=/usr/lib32/pkgconfig \
+    --with-versioned-syms \
+    --libdir=/usr/lib32
 
 make V=1 -j8
 popd
 
 
-# >> build post
-# << build post
 %install
 rm -rf %{buildroot}
-# >> install pre
-# << install pre
 %make_install
 
 pushd ../build32
@@ -220,18 +248,6 @@ mkdir %{buildroot}/usr/lib
 pushd ../ncurses-6.1w
 %make_install
 popd
-
-
-# >> install post
-# << install post
-
-
-
-
-
-
-
-
 
 ### these utterly disgusting hacks are stolen from Fedora.
 
@@ -253,20 +269,8 @@ echo "INPUT(-lncurses)" > $RPM_BUILD_ROOT/usr/lib64/libcurses.so
 echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 
 
-
-
-
-
-
-
-
-
-
 %files
 %defattr(-,root,root,-)
-# >> files
-# << files
-
 
 %files dev
 %defattr(-,root,root,-)
@@ -274,16 +278,10 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/lib64/*.so
 /usr/lib64/pkgconfig/*.pc
 
-# >> files dev
-# << files dev
-
 %files dev32
 %defattr(-,root,root,-)
 /usr/lib32/*.so
 /usr/lib32/pkgconfig/*.pc
-
-# >> files dev
-# << files dev
 
 %files bin
 %defattr(-,root,root,-)
@@ -310,10 +308,8 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/lib64/libncurses++w.so.6
 /usr/lib64/libncurses++w.so.6.1
 
-
 %files lib-narrow
 %defattr(-,root,root,-)
-
 /usr/lib64/libform.so.6
 /usr/lib64/libform.so.6.1
 /usr/lib64/libmenu.so.6
@@ -325,10 +321,6 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/lib64/libtinfo.so.6
 /usr/lib64/libtinfo.so.6.1
 
-
-# >> files bin
-# << files bin
-
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libformw.so.*
@@ -336,7 +328,6 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/lib64/libncursesw.so.*
 /usr/lib64/libpanelw.so.*
 /usr/lib64/libtinfow.so.*
-
 
 %files lib32
 %defattr(-,root,root,-)
@@ -709,7 +700,6 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/x/xterm+titlestack
 /usr/share/terminfo/x/xterm-direct
 /usr/share/terminfo/x/xterm-direct2
-
 
 %files data-rare
 %defattr(-,root,root,-)
@@ -3117,17 +3107,9 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/t/terminator
 /usr/share/terminfo/t/terminology
 
-# >> files data
-# << files data
-
 %files docs
 %defattr(-,root,root,-)
 %doc /usr/share/man/man1/*
 %doc /usr/share/man/man3/*
 %doc /usr/share/man/man5/*
 %doc /usr/share/man/man7/*
-# >> files docs
-# << files docs
-
-
-
