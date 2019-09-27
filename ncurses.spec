@@ -172,7 +172,7 @@ export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sect
     --with-pkg-config-libdir=/usr/lib64/pkgconfig \
     --with-versioned-syms
 
-make V=1 -j8
+make V=1 %{?_smp_mflags}
 
 pushd ../ncurses-6.1w
 %configure --disable-static \
@@ -188,7 +188,7 @@ pushd ../ncurses-6.1w
     --with-pkg-config-libdir=/usr/lib64/pkgconfig \
     --with-versioned-syms
 
-make V=1 -j8
+make V=1 %{?_smp_mflags}
 popd
 
 pushd ../build32
@@ -207,7 +207,7 @@ export CXXFLAGS="$CXXFLAGS -m32 -mstackrealign"
     --with-versioned-syms \
     --libdir=/usr/lib32
 
-make V=1 -j8
+make V=1 %{?_smp_mflags}
 popd
 
 pushd ../build32w
@@ -227,7 +227,7 @@ export CXXFLAGS="$CXXFLAGS -m32 -mstackrealign"
     --with-versioned-syms \
     --libdir=/usr/lib32
 
-make V=1 -j8
+make V=1 %{?_smp_mflags}
 popd
 
 
