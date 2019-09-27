@@ -1,7 +1,7 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
 Version:    6.1
-Release:    55
+Release:    56
 Group:      System/Libraries
 License:    MIT
 URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.1.tar.gz
@@ -192,8 +192,8 @@ make V=1 -j8
 popd
 
 pushd ../build32
-export CFLAGS="$CFLAGS -m32"
-export CXXFLAGS="$CXXFLAGS -m32"
+export CFLAGS="$CFLAGS -m32 -mstackrealign"
+export CXXFLAGS="$CXXFLAGS -m32 -mstackrealign"
 %configure --disable-static \
     --with-shared \
     --with-termlib \
@@ -211,8 +211,8 @@ make V=1 -j8
 popd
 
 pushd ../build32w
-export CFLAGS="$CFLAGS -m32"
-export CXXFLAGS="$CXXFLAGS -m32"
+export CFLAGS="$CFLAGS -m32 -mstackrealign"
+export CXXFLAGS="$CXXFLAGS -m32 -mstackrealign"
 %configure --disable-static \
     --with-shared \
     --with-termlib \
