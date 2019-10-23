@@ -1,11 +1,11 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
-Version:    6.1
-Release:    56
+Version:    6.1_20191012
+Release:    57
 Group:      System/Libraries
 License:    MIT
-URL:        http://mirrors.kernel.org/gnu/ncurses/ncurses-6.1.tar.gz
-Source0:    http://mirrors.kernel.org/gnu/ncurses/ncurses-6.1.tar.gz
+URL:        https://invisible-mirror.net/archives/ncurses/current/ncurses-6.1-20191012.tgz
+Source0:    https://invisible-mirror.net/archives/ncurses/current/ncurses-6.1-20191012.tgz
 Requires:   ncurses-bin
 Requires:   ncurses-data
 Requires:   ncurses-data-rare
@@ -17,23 +17,6 @@ BuildRequires : gcc-libgcc32
 BuildRequires : gcc-libstdc++32
 BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
-Patch1: patch-20180129.patch
-Patch2: patch-20180203.patch
-Patch3: patch-20180210.patch
-Patch4: patch-20180217.patch
-Patch5: patch-20180224.patch
-Patch6: patch-20180303.patch
-Patch7: patch-20180317.patch
-Patch8: patch-20180324.patch
-Patch9: patch-20180331.patch
-Patch10: patch-20180407.patch
-Patch11: patch-20180414.patch
-Patch12: patch-20180428.patch
-Patch13: patch-20180505.patch
-Patch14: patch-20180512.patch
-Patch15: patch-20180519.patch
-Patch16: patch-20180526.patch
-Patch17: patch-20180602.patch
 
 %description
 See the file ANNOUNCE for a summary of ncurses features and ports.
@@ -128,28 +111,11 @@ Documentation files for the ncurses package
 
 
 %prep
-%setup -q -n ncurses-6.1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch14 -p1
-%patch15 -p1
-%patch16 -p1
-%patch17 -p1
+%setup -q -n ncurses-6.1-20191012
 pushd ..
-cp -a ncurses-6.1 build32
-cp -a ncurses-6.1 build32w
-cp -a ncurses-6.1 ncurses-6.1w
+cp -a ncurses-6.1-20191012 build32
+cp -a ncurses-6.1-20191012 build32w
+cp -a ncurses-6.1-20191012 ncurses-6.1w
 popd
 
 
@@ -700,6 +666,35 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/x/xterm+titlestack
 /usr/share/terminfo/x/xterm-direct
 /usr/share/terminfo/x/xterm-direct2
+/usr/share/terminfo/a/adds200
+/usr/share/terminfo/a/alacritty
+/usr/share/terminfo/a/alacritty+common
+/usr/share/terminfo/a/alacritty-direct
+/usr/share/terminfo/d/domterm
+/usr/share/terminfo/e/ecma+index
+/usr/share/terminfo/k/kitty
+/usr/share/terminfo/k/kitty+common
+/usr/share/terminfo/k/kitty-direct
+/usr/share/terminfo/m/mintty
+/usr/share/terminfo/m/mintty+common
+/usr/share/terminfo/m/mintty-direct
+/usr/share/terminfo/m/ms-terminal
+/usr/share/terminfo/n/n7900
+/usr/share/terminfo/n/nsterm-build309
+/usr/share/terminfo/n/nsterm-direct
+/usr/share/terminfo/s/screen4
+/usr/share/terminfo/s/screen5
+/usr/share/terminfo/t/ti703
+/usr/share/terminfo/t/ti703-w
+/usr/share/terminfo/t/ti707
+/usr/share/terminfo/t/ti707-w
+/usr/share/terminfo/v/vscode
+/usr/share/terminfo/v/vscode-direct
+/usr/share/terminfo/v/vt420+lrmm
+/usr/share/terminfo/v/vte-2018
+/usr/share/terminfo/x/xterm+keypad
+/usr/share/terminfo/x/xterm+osc104
+/usr/share/terminfo/x/xterm.js
 
 %files data-rare
 %defattr(-,root,root,-)

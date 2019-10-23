@@ -1,9 +1,1 @@
-To patch CVEs:
-1. Download ncurses sources, extract them, and initialize git repository in the src root
-2. Go to http://invisible-island.net/ncurses/#download_ncurses
-3. Download the latest rollup of patches as a patch-X.X-YYYYMMDD.sh.gz file and ungzip the archive
-4. Copy the extracted file into the src root, make it executable, and run it
-5. Make a git commit to mark the rollup point
-6. Download the remaining weekly patches from dev-patches.zip and unzip the archive
-7. Apply all the git patches AFTER the rollup patch date in order
-8. Make a git commit to mark the next rollup point
+When affected by CVEs, bump version to a newer tarball from https://invisible-mirror.net/archives/ncurses/current/
