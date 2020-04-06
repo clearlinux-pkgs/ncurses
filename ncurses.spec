@@ -1,7 +1,7 @@
 Name:       ncurses
 Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
 Version:    6.1_20191012
-Release:    58
+Release:    59
 Group:      System/Libraries
 License:    MIT
 URL:        https://invisible-mirror.net/archives/ncurses/current/ncurses-6.1-20191012.tgz
