@@ -1,22 +1,22 @@
-Name:       ncurses
-Summary:    See the file ANNOUNCE for a summary of ncurses features and ports
-Version:    6.1_20191012
-Release:    62
-Group:      System/Libraries
-License:    MIT
-URL:        https://invisible-mirror.net/archives/ncurses/current/ncurses-6.1-20191012.tgz
-Source0:    https://invisible-mirror.net/archives/ncurses/current/ncurses-6.1-20191012.tgz
-Requires:   ncurses-bin
-Requires:   ncurses-data
-Requires:   ncurses-data-rare
-Requires:   ncurses-docs
-Requires:   ncurses-lib
-BuildRequires :  python3-core pkg-config-dev
+Name     : ncurses
+Version  : 6.1_20191012
+Release  : 62
+URL      : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.1-20191012.tgz
+Source0  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.1-20191012.tgz
+Summary  : See the file ANNOUNCE for a summary of ncurses features and ports
+Group    : System/Libraries
+License  : MIT
+Requires: ncurses-bin
+Requires: ncurses-data
+Requires: ncurses-data-rare
+Requires: ncurses-docs
+Requires: ncurses-lib
 BuildRequires : gcc-dev32
 BuildRequires : gcc-libgcc32
 BuildRequires : gcc-libstdc++32
 BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
+BuildRequires : python3-core pkg-config-dev
 
 %description
 See the file ANNOUNCE for a summary of ncurses features and ports.
@@ -36,6 +36,7 @@ Requires:   ncurses-lib-plusplus
 %description dev
 Development files for the ncurses package
 
+
 %package dev32
 Summary:    Development components for the ncurses package
 Group:      Development/Libraries
@@ -47,6 +48,7 @@ Requires:   ncurses-lib-narrow
 %description dev32
 Development files for the ncurses package
 
+
 %package bin
 Summary:    Binary components for the ncurses package
 Group:      Libraries
@@ -55,6 +57,7 @@ Requires:   ncurses-data
 %description bin
 Binary files for the ncurses package
 
+
 %package lib
 Summary:    Library components for the ncurses package
 Group:      Libraries
@@ -62,6 +65,7 @@ Requires:   ncurses-data
 
 %description lib
 Library files for the ncurses package
+
 
 %package lib32
 Summary:    Library components for the ncurses package
@@ -80,6 +84,7 @@ Requires:   ncurses-data
 %description lib-narrow
 Library files for the ncurses package
 
+
 %package lib-plusplus
 Summary:    C++ components for the ncurses package
 Group:      Libraries
@@ -88,6 +93,7 @@ Requires:   ncurses-data
 %description lib-plusplus
 Library files for the ncurses package
 
+
 %package data
 Summary:    Shared data components for the ncurses package
 Group:      Libraries
@@ -95,12 +101,14 @@ Group:      Libraries
 %description data
 Data files for the ncurses package
 
+
 %package data-rare
 Summary:    Shared data components for the ncurses package
 Group:      Libraries
 
 %description data-rare
 Data files for the ncurses package
+
 
 %package docs
 Summary:    Documentation components for the ncurses package
