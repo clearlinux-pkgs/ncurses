@@ -1,8 +1,8 @@
 Name     : ncurses
-Version  : 6.1_20191012
-Release  : 62
-URL      : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.1-20191012.tgz
-Source0  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.1-20191012.tgz
+Version  : 6.2
+Release  : 63
+URL      : https://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz
+Source0  : https://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz
 Summary  : See the file ANNOUNCE for a summary of ncurses features and ports
 Group    : System/Libraries
 License  : MIT
@@ -119,11 +119,11 @@ Documentation files for the ncurses package
 
 
 %prep
-%setup -q -n ncurses-6.1-20191012
+%setup -q -n ncurses-6.2
 pushd ..
-cp -a ncurses-6.1-20191012 build32
-cp -a ncurses-6.1-20191012 build32w
-cp -a ncurses-6.1-20191012 ncurses-6.1w
+cp -a ncurses-6.2 build32
+cp -a ncurses-6.2 build32w
+cp -a ncurses-6.2 ncurses-6.2w
 popd
 
 
@@ -148,7 +148,7 @@ export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sect
 
 make V=1 %{?_smp_mflags}
 
-pushd ../ncurses-6.1w
+pushd ../ncurses-6.2w
 %configure --disable-static \
     --with-shared \
     --with-termlib \
@@ -219,7 +219,7 @@ popd
 
 mkdir %{buildroot}/usr/lib
 
-pushd ../ncurses-6.1w
+pushd ../ncurses-6.2w
 %make_install
 popd
 
@@ -278,22 +278,22 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 %files lib-plusplus
 %defattr(-,root,root,-)
 /usr/lib64/libncurses++.so.6
-/usr/lib64/libncurses++.so.6.1
+/usr/lib64/libncurses++.so.6.2
 /usr/lib64/libncurses++w.so.6
-/usr/lib64/libncurses++w.so.6.1
+/usr/lib64/libncurses++w.so.6.2
 
 %files lib-narrow
 %defattr(-,root,root,-)
 /usr/lib64/libform.so.6
-/usr/lib64/libform.so.6.1
+/usr/lib64/libform.so.6.2
 /usr/lib64/libmenu.so.6
-/usr/lib64/libmenu.so.6.1
+/usr/lib64/libmenu.so.6.2
 /usr/lib64/libncurses.so.6
-/usr/lib64/libncurses.so.6.1
+/usr/lib64/libncurses.so.6.2
 /usr/lib64/libpanel.so.6
-/usr/lib64/libpanel.so.6.1
+/usr/lib64/libpanel.so.6.2
 /usr/lib64/libtinfo.so.6
-/usr/lib64/libtinfo.so.6.1
+/usr/lib64/libtinfo.so.6.2
 
 %files lib
 %defattr(-,root,root,-)
@@ -311,15 +311,15 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/lib32/libpanel.so.*
 /usr/lib32/libtinfo.so.*
 /usr/lib32/libformw.so.6
-/usr/lib32/libformw.so.6.1
+/usr/lib32/libformw.so.6.2
 /usr/lib32/libmenuw.so.6
-/usr/lib32/libmenuw.so.6.1
+/usr/lib32/libmenuw.so.6.2
 /usr/lib32/libncursesw.so.6
-/usr/lib32/libncursesw.so.6.1
+/usr/lib32/libncursesw.so.6.2
 /usr/lib32/libpanelw.so.6
-/usr/lib32/libpanelw.so.6.1
+/usr/lib32/libpanelw.so.6.2
 /usr/lib32/libtinfow.so.6
-/usr/lib32/libtinfow.so.6.1
+/usr/lib32/libtinfow.so.6.2
 
 %files data
 %defattr(-,root,root,-)
@@ -513,6 +513,7 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/s/screen5
 /usr/share/terminfo/s/st-0.6
 /usr/share/terminfo/s/st-0.7
+/usr/share/terminfo/s/st-0.8
 /usr/share/terminfo/s/st-direct
 /usr/share/terminfo/t/teraterm-256color
 /usr/share/terminfo/t/teraterm4.97
@@ -673,6 +674,7 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/x/xterm-direct
 /usr/share/terminfo/x/xterm-direct2
 /usr/share/terminfo/x/xterm-hp
+/usr/share/terminfo/x/xterm-mono
 /usr/share/terminfo/x/xterm-new
 /usr/share/terminfo/x/xterm-nic
 /usr/share/terminfo/x/xterm-noapp
