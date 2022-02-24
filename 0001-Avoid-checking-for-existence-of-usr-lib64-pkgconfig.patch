@@ -1,0 +1,33 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Patrick McCarty <patrick.mccarty@intel.com>
+Date: Thu, 24 Feb 2022 10:49:18 -0800
+Subject: [PATCH] Avoid checking for existence of /usr/lib64/pkgconfig
+
+At time of this writing (2022-02-24), the ncurses buildroot does not
+contain any installed packages with pkgconfig files, so the
+/usr/lib64/pkgconfig does not exist.
+
+During the staged install, it *will* exist, so we don't need configure's
+existence check here.
+
+Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
+---
+ configure | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/configure b/configure
+index 421cf85..e1fff2f 100755
+--- a/configure
++++ b/configure
+@@ -4229,11 +4229,8 @@ echo $ECHO_N "checking for first directory... $ECHO_C" >&6
+ cf_pkg_config_path=none
+ for cf_config in $cf_search_path
+ do
+-	if test -d "$cf_config"
+-	then
+ 		cf_pkg_config_path=$cf_config
+ 		break
+-	fi
+ done
+ echo "$as_me:4238: result: $cf_pkg_config_path" >&5
+ echo "${ECHO_T}$cf_pkg_config_path" >&6

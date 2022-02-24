@@ -1,8 +1,8 @@
 Name     : ncurses
-Version  : 6.2
-Release  : 63
-URL      : https://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz
-Source0  : https://mirrors.kernel.org/gnu/ncurses/ncurses-6.2.tar.gz
+Version  : 6.3
+Release  : 64
+URL      : https://mirrors.kernel.org/gnu/ncurses/ncurses-6.3.tar.gz
+Source0  : https://mirrors.kernel.org/gnu/ncurses/ncurses-6.3.tar.gz
 Summary  : See the file ANNOUNCE for a summary of ncurses features and ports
 Group    : System/Libraries
 License  : MIT
@@ -17,6 +17,7 @@ BuildRequires : gcc-libstdc++32
 BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
 BuildRequires : python3-core pkg-config-dev
+Patch1: 0001-Avoid-checking-for-existence-of-usr-lib64-pkgconfig.patch
 
 %description
 See the file ANNOUNCE for a summary of ncurses features and ports.
@@ -119,11 +120,12 @@ Documentation files for the ncurses package
 
 
 %prep
-%setup -q -n ncurses-6.2
+%setup -q -n ncurses-6.3
+%patch1 -p1
 pushd ..
-cp -a ncurses-6.2 build32
-cp -a ncurses-6.2 build32w
-cp -a ncurses-6.2 ncurses-6.2w
+cp -a ncurses-6.3 build32
+cp -a ncurses-6.3 build32w
+cp -a ncurses-6.3 ncurses-6.3w
 popd
 
 
@@ -148,7 +150,7 @@ export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sect
 
 make V=1 %{?_smp_mflags}
 
-pushd ../ncurses-6.2w
+pushd ../ncurses-6.3w
 %configure --disable-static \
     --with-shared \
     --with-termlib \
@@ -219,7 +221,7 @@ popd
 
 mkdir %{buildroot}/usr/lib
 
-pushd ../ncurses-6.2w
+pushd ../ncurses-6.3w
 %make_install
 popd
 
@@ -278,22 +280,22 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 %files lib-plusplus
 %defattr(-,root,root,-)
 /usr/lib64/libncurses++.so.6
-/usr/lib64/libncurses++.so.6.2
+/usr/lib64/libncurses++.so.6.3
 /usr/lib64/libncurses++w.so.6
-/usr/lib64/libncurses++w.so.6.2
+/usr/lib64/libncurses++w.so.6.3
 
 %files lib-narrow
 %defattr(-,root,root,-)
 /usr/lib64/libform.so.6
-/usr/lib64/libform.so.6.2
+/usr/lib64/libform.so.6.3
 /usr/lib64/libmenu.so.6
-/usr/lib64/libmenu.so.6.2
+/usr/lib64/libmenu.so.6.3
 /usr/lib64/libncurses.so.6
-/usr/lib64/libncurses.so.6.2
+/usr/lib64/libncurses.so.6.3
 /usr/lib64/libpanel.so.6
-/usr/lib64/libpanel.so.6.2
+/usr/lib64/libpanel.so.6.3
 /usr/lib64/libtinfo.so.6
-/usr/lib64/libtinfo.so.6.2
+/usr/lib64/libtinfo.so.6.3
 
 %files lib
 %defattr(-,root,root,-)
@@ -311,15 +313,15 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/lib32/libpanel.so.*
 /usr/lib32/libtinfo.so.*
 /usr/lib32/libformw.so.6
-/usr/lib32/libformw.so.6.2
+/usr/lib32/libformw.so.6.3
 /usr/lib32/libmenuw.so.6
-/usr/lib32/libmenuw.so.6.2
+/usr/lib32/libmenuw.so.6.3
 /usr/lib32/libncursesw.so.6
-/usr/lib32/libncursesw.so.6.2
+/usr/lib32/libncursesw.so.6.3
 /usr/lib32/libpanelw.so.6
-/usr/lib32/libpanelw.so.6.2
+/usr/lib32/libpanelw.so.6.3
 /usr/lib32/libtinfow.so.6
-/usr/lib32/libtinfow.so.6.2
+/usr/lib32/libtinfow.so.6.3
 
 %files data
 %defattr(-,root,root,-)
@@ -327,6 +329,8 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/tabset/stdcrt
 /usr/share/tabset/vt100
 /usr/share/tabset/vt300
+/usr/share/terminfo/X/X-hpterm-color2
+/usr/share/terminfo/a/absolute
 /usr/share/terminfo/a/adds200
 /usr/share/terminfo/a/alacritty
 /usr/share/terminfo/a/alacritty+common
@@ -346,6 +350,7 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/a/ansi+local1
 /usr/share/terminfo/a/ansi+pp
 /usr/share/terminfo/a/ansi+rca
+/usr/share/terminfo/a/ansi+rca2
 /usr/share/terminfo/a/ansi+rep
 /usr/share/terminfo/a/ansi+sgr
 /usr/share/terminfo/a/ansi+sgrbold
@@ -386,6 +391,8 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/a/ansisysk
 /usr/share/terminfo/a/ansiterm
 /usr/share/terminfo/a/ansiw
+/usr/share/terminfo/a/att610+cvis
+/usr/share/terminfo/a/att610+cvis0
 /usr/share/terminfo/d/dec-vt100
 /usr/share/terminfo/d/dec-vt220
 /usr/share/terminfo/d/dec-vt330
@@ -400,7 +407,16 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/e/ecma+italics
 /usr/share/terminfo/e/ecma+strikeout
 /usr/share/terminfo/f/fbterm
+/usr/share/terminfo/f/foot
+/usr/share/terminfo/f/foot+base
+/usr/share/terminfo/f/foot-direct
+/usr/share/terminfo/h/hp98550-color
+/usr/share/terminfo/h/hp98550a-color
+/usr/share/terminfo/h/hpterm-color2
+/usr/share/terminfo/h/hterm
+/usr/share/terminfo/h/hterm-256color
 /usr/share/terminfo/i/iTerm2.app
+/usr/share/terminfo/i/infoton2
 /usr/share/terminfo/i/iterm2
 /usr/share/terminfo/i/iterm2-direct
 /usr/share/terminfo/k/kitty
@@ -408,6 +424,8 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/k/kitty-direct
 /usr/share/terminfo/k/konsole-direct
 /usr/share/terminfo/l/linux
+/usr/share/terminfo/l/linux+decid
+/usr/share/terminfo/l/linux+sfkeys
 /usr/share/terminfo/l/linux-16color
 /usr/share/terminfo/l/linux-basic
 /usr/share/terminfo/l/linux-c
@@ -420,6 +438,7 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/l/linux-m1b
 /usr/share/terminfo/l/linux-m2
 /usr/share/terminfo/l/linux-nic
+/usr/share/terminfo/l/linux-s
 /usr/share/terminfo/l/linux-vt
 /usr/share/terminfo/l/linux2.6.26
 /usr/share/terminfo/m/minitel1-nb
@@ -445,12 +464,15 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/p/putty+fnkeys+vt100
 /usr/share/terminfo/p/putty+fnkeys+vt400
 /usr/share/terminfo/p/putty+fnkeys+xterm
+/usr/share/terminfo/p/putty+keypad
+/usr/share/terminfo/p/putty+screen
 /usr/share/terminfo/p/putty-256color
 /usr/share/terminfo/p/putty-m1
 /usr/share/terminfo/p/putty-m1b
 /usr/share/terminfo/p/putty-m2
 /usr/share/terminfo/p/putty-noapp
 /usr/share/terminfo/p/putty-sco
+/usr/share/terminfo/p/putty-screen
 /usr/share/terminfo/p/putty-vt100
 /usr/share/terminfo/r/rxvt
 /usr/share/terminfo/r/rxvt+pcfkeys
@@ -489,6 +511,7 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/s/screen.linux-m1
 /usr/share/terminfo/s/screen.linux-m1b
 /usr/share/terminfo/s/screen.linux-m2
+/usr/share/terminfo/s/screen.linux-s
 /usr/share/terminfo/s/screen.minitel1
 /usr/share/terminfo/s/screen.minitel1-nb
 /usr/share/terminfo/s/screen.minitel12-80
@@ -511,6 +534,8 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/s/screen3
 /usr/share/terminfo/s/screen4
 /usr/share/terminfo/s/screen5
+/usr/share/terminfo/s/scrt
+/usr/share/terminfo/s/securecrt
 /usr/share/terminfo/s/st-0.6
 /usr/share/terminfo/s/st-0.7
 /usr/share/terminfo/s/st-0.8
@@ -519,6 +544,7 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/t/teraterm4.97
 /usr/share/terminfo/t/terminology-0.6.1
 /usr/share/terminfo/t/terminology-1.0.0
+/usr/share/terminfo/t/terminology-1.8.1
 /usr/share/terminfo/t/termite
 /usr/share/terminfo/t/ti703
 /usr/share/terminfo/t/ti703-w
@@ -526,6 +552,7 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/t/ti707-w
 /usr/share/terminfo/t/tmux
 /usr/share/terminfo/t/tmux-256color
+/usr/share/terminfo/t/tmux-direct
 /usr/share/terminfo/v/viewdata
 /usr/share/terminfo/v/viewdata-o
 /usr/share/terminfo/v/viewdata-rv
@@ -572,9 +599,14 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/v/vt200-old
 /usr/share/terminfo/v/vt200-w
 /usr/share/terminfo/v/vt220
+/usr/share/terminfo/v/vt220+cvis
+/usr/share/terminfo/v/vt220+cvis8
 /usr/share/terminfo/v/vt220+keypad
+/usr/share/terminfo/v/vt220+pcedit
+/usr/share/terminfo/v/vt220+vtedit
 /usr/share/terminfo/v/vt220-8
 /usr/share/terminfo/v/vt220-8bit
+/usr/share/terminfo/v/vt220-base
 /usr/share/terminfo/v/vt220-js
 /usr/share/terminfo/v/vt220-nam
 /usr/share/terminfo/v/vt220-old
@@ -606,6 +638,8 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/v/vt510pc
 /usr/share/terminfo/v/vt510pcdos
 /usr/share/terminfo/v/vt52
+/usr/share/terminfo/v/vt52+keypad
+/usr/share/terminfo/v/vt52-basic
 /usr/share/terminfo/v/vt520
 /usr/share/terminfo/v/vt520ansi
 /usr/share/terminfo/v/vt525
@@ -623,19 +657,26 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/v/vte-direct
 /usr/share/terminfo/x/xterm
 /usr/share/terminfo/x/xterm+256color
+/usr/share/terminfo/x/xterm+256color2
 /usr/share/terminfo/x/xterm+256setaf
 /usr/share/terminfo/x/xterm+88color
+/usr/share/terminfo/x/xterm+88color2
 /usr/share/terminfo/x/xterm+alt+title
 /usr/share/terminfo/x/xterm+alt1049
 /usr/share/terminfo/x/xterm+app
 /usr/share/terminfo/x/xterm+direct
+/usr/share/terminfo/x/xterm+direct16
 /usr/share/terminfo/x/xterm+direct2
+/usr/share/terminfo/x/xterm+direct256
 /usr/share/terminfo/x/xterm+edit
 /usr/share/terminfo/x/xterm+indirect
 /usr/share/terminfo/x/xterm+kbs
 /usr/share/terminfo/x/xterm+keypad
+/usr/share/terminfo/x/xterm+meta
 /usr/share/terminfo/x/xterm+noalt
 /usr/share/terminfo/x/xterm+noapp
+/usr/share/terminfo/x/xterm+nofkeys
+/usr/share/terminfo/x/xterm+nopcfkeys
 /usr/share/terminfo/x/xterm+osc104
 /usr/share/terminfo/x/xterm+pc+edit
 /usr/share/terminfo/x/xterm+pcc0
@@ -655,6 +696,7 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/x/xterm+sm+1006
 /usr/share/terminfo/x/xterm+titlestack
 /usr/share/terminfo/x/xterm+tmux
+/usr/share/terminfo/x/xterm+tmux2
 /usr/share/terminfo/x/xterm+vt+edit
 /usr/share/terminfo/x/xterm+x10mouse
 /usr/share/terminfo/x/xterm+x11hilite
@@ -672,7 +714,9 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/share/terminfo/x/xterm-bold
 /usr/share/terminfo/x/xterm-color
 /usr/share/terminfo/x/xterm-direct
+/usr/share/terminfo/x/xterm-direct16
 /usr/share/terminfo/x/xterm-direct2
+/usr/share/terminfo/x/xterm-direct256
 /usr/share/terminfo/x/xterm-hp
 /usr/share/terminfo/x/xterm-mono
 /usr/share/terminfo/x/xterm-new
