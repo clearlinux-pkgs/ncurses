@@ -1,6 +1,6 @@
 Name     : ncurses
 Version  : 6.3
-Release  : 64
+Release  : 65
 URL      : https://mirrors.kernel.org/gnu/ncurses/ncurses-6.3.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/ncurses/ncurses-6.3.tar.gz
 Summary  : See the file ANNOUNCE for a summary of ncurses features and ports
