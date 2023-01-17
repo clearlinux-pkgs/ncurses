@@ -19,6 +19,11 @@ BuildRequires : glibc-libc32
 BuildRequires : python3-core pkg-config-dev
 Patch1: 0001-Avoid-checking-for-existence-of-usr-lib64-pkgconfig.patch
 
+%define keepstatic 1
+%define debug_package %{nil}
+%define __strip /bin/true
+
+
 %description
 See the file ANNOUNCE for a summary of ncurses features and ports.
 See the file INSTALL for instructions on how to build and install ncurses.
@@ -133,9 +138,9 @@ popd
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition "
+export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto -fno-semantic-interposition -g1 "
 
-%configure --disable-static \
+%configure --enable-static \
     --with-shared \
     --with-termlib \
     --with-progs \
@@ -151,7 +156,7 @@ export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sect
 make V=1 %{?_smp_mflags}
 
 pushd ../ncurses-6.3w
-%configure --disable-static \
+%configure --without-static \
     --with-shared \
     --with-termlib \
     --enable-widec \
@@ -170,7 +175,7 @@ popd
 pushd ../build32
 export CFLAGS="$CFLAGS -m32 -mstackrealign"
 export CXXFLAGS="$CXXFLAGS -m32 -mstackrealign"
-%configure --disable-static \
+%configure --without-static \
     --with-shared \
     --with-termlib \
     --with-progs \
@@ -253,11 +258,13 @@ echo "INPUT(-lncursesw)" > $RPM_BUILD_ROOT/usr/lib64/libcursesw.so
 /usr/include/*.h
 /usr/lib64/*.so
 /usr/lib64/pkgconfig/*.pc
+/usr/lib64/*.a
 
 %files dev32
 %defattr(-,root,root,-)
 /usr/lib32/*.so
 /usr/lib32/pkgconfig/*.pc
+/usr/lib32/*.a
 
 %files bin
 %defattr(-,root,root,-)
