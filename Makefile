@@ -1,3 +1,5 @@
 PKG_NAME := ncurses
-URL := http://mirrors.kernel.org/gnu/ncurses/ncurses-6.0.tar.gz
+URL = https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
+ARCHIVES = 
+
 include ../common/Makefile.common

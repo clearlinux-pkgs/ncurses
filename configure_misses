@@ -1,0 +1,154 @@
+Configure miss: /usr/bin/pkg-config library directory... checking for first directory
+Configure miss: Gpm_Open in -lgpm
+Configure miss: _LARGE_FILES value needed for large files
+Configure miss: _LARGE_FILES value needed for large files
+Configure miss: builtin bool type
+Configure miss: builtin bool type
+Configure miss: exctags
+Configure miss: exctags
+Configure miss: exetags
+Configure miss: exetags
+Configure miss: ggrep
+Configure miss: ggrep
+Configure miss: gnat
+Configure miss: gnat
+Configure miss: gprbuild
+Configure miss: gprbuild
+Configure miss: gprconfig
+Configure miss: gprconfig
+Configure miss: i686-generic-linux-gnu-infocmp
+Configure miss: i686-generic-linux-gnu-ld
+Configure miss: i686-generic-linux-gnu-tic
+Configure miss: if /usr/lib64/ccache/bin/g++ accepts parameter initialization
+Configure miss: if /usr/lib64/ccache/bin/g++ accepts parameter initialization
+Configure miss: if RCS identifiers should be compiled-in
+Configure miss: if RCS identifiers should be compiled-in
+Configure miss: if _PATH_TTYS file exists
+Configure miss: if _PATH_TTYS file exists
+Configure miss: if external environ is declared
+Configure miss: if external environ is declared
+Configure miss: if external errno exists
+Configure miss: if external errno exists
+Configure miss: if install needs to be told about ownership
+Configure miss: if install needs to be told about ownership
+Configure miss: if rpath option should be used
+Configure miss: if rpath option should be used
+Configure miss: if the POSIX test-macros are already defined
+Configure miss: if the POSIX test-macros are already defined
+Configure miss: if this is really Clang C compiler
+Configure miss: if this is really Clang C compiler
+Configure miss: if this is really Intel C compiler
+Configure miss: if this is really Intel C compiler
+Configure miss: if tic should use symbolic links
+Configure miss: if tic should use symbolic links
+Configure miss: if tputs should process BSD-style prefix padding
+Configure miss: if tputs should process BSD-style prefix padding
+Configure miss: if versioned-symbols file should be used
+Configure miss: if versioned-symbols file should be used
+Configure miss: if we must include wchar.h to declare wchar_t
+Configure miss: if we must include wchar.h to declare wchar_t
+Configure miss: if we should install .pc files for /usr/bin/pkg-config
+Configure miss: if we should install .pc files for /usr/bin/x86_64-generic-linux-gnu-pkg-config
+Configure miss: if you want all development code
+Configure miss: if you want all development code
+Configure miss: if you want broken-linker support code
+Configure miss: if you want broken-linker support code
+Configure miss: if you want colorfgbg code
+Configure miss: if you want colorfgbg code
+Configure miss: if you want experimental safe-sprintf code
+Configure miss: if you want experimental safe-sprintf code
+Configure miss: if you want hard-tabs code
+Configure miss: if you want hard-tabs code
+Configure miss: if you want limited support for xmc
+Configure miss: if you want limited support for xmc
+Configure miss: if you want opaque curses-library structures
+Configure miss: if you want opaque curses-library structures
+Configure miss: if you want opaque form-library structures
+Configure miss: if you want opaque form-library structures
+Configure miss: if you want opaque menu-library structures
+Configure miss: if you want opaque menu-library structures
+Configure miss: if you want opaque panel-library structures
+Configure miss: if you want opaque panel-library structures
+Configure miss: if you want reentrant code
+Configure miss: if you want reentrant code
+Configure miss: if you want termcap-fallback support
+Configure miss: if you want termcap-fallback support
+Configure miss: if you want to build C++ shared libraries
+Configure miss: if you want to build C++ shared libraries
+Configure miss: if you want to build a separate tic library
+Configure miss: if you want to build a separate tic library
+Configure miss: if you want to build libraries with libtool
+Configure miss: if you want to build libraries with libtool
+Configure miss: if you want to build profiling libraries
+Configure miss: if you want to build profiling libraries
+Configure miss: if you want to build programs such as tic
+Configure miss: if you want to build programs such as tic
+Configure miss: if you want to build with terminal-driver
+Configure miss: if you want to build with terminal-driver
+Configure miss: if you want to disable extra LDFLAGS for package-scripts
+Configure miss: if you want to disable extra LDFLAGS for package-scripts
+Configure miss: if you want to disable library suffixes
+Configure miss: if you want to disable library suffixes
+Configure miss: if you want to enable runtime assertions
+Configure miss: if you want to enable runtime assertions
+Configure miss: if you want to enable wattr* macros
+Configure miss: if you want to enable wattr* macros
+Configure miss: if you want to link with the pthread library
+Configure miss: if you want to link with the pthread library
+Configure miss: if you want to perform memory-leak testing
+Configure miss: if you want to perform memory-leak testing
+Configure miss: if you want to specify strip-program
+Configure miss: if you want to specify strip-program
+Configure miss: if you want to turn on gcc warnings
+Configure miss: if you want to turn on gcc warnings
+Configure miss: if you want to use C11 _Noreturn feature
+Configure miss: if you want to use C11 _Noreturn feature
+Configure miss: if you want to use PCRE2 for regular-expressions
+Configure miss: if you want to use PCRE2 for regular-expressions
+Configure miss: if you want to use dbmalloc for testing
+Configure miss: if you want to use dbmalloc for testing
+Configure miss: if you want to use dmalloc for testing
+Configure miss: if you want to use dmalloc for testing
+Configure miss: if you want to use gcc -fvisibility option
+Configure miss: if you want to use gcc -fvisibility option
+Configure miss: if you want to use signed Boolean array in term.h
+Configure miss: if you want to use signed Boolean array in term.h
+Configure miss: if you want to use valgrind for testing
+Configure miss: if you want to use valgrind for testing
+Configure miss: if you want to work around bogus compiler/loader warnings
+Configure miss: if you want to work around bogus compiler/loader warnings
+Configure miss: if you want wgetch-events code
+Configure miss: if you want wgetch-events code
+Configure miss: lint
+Configure miss: lint
+Configure miss: manpage renaming
+Configure miss: manpage renaming
+Configure miss: manpage tbl
+Configure miss: manpage tbl
+Configure miss: mawk
+Configure miss: mawk
+Configure miss: opendir in -ldir
+Configure miss: opendir in -ldir
+Configure miss: sigvec
+Configure miss: sigvec
+Configure miss: special defines needed for etip.h
+Configure miss: special defines needed for etip.h
+Configure miss: sys/termio.h
+Configure miss: sys/termio.h
+Configure miss: type sigaction_t
+Configure miss: type sigaction_t
+Configure miss: whether setvbuf arguments are reversed
+Configure miss: whether setvbuf arguments are reversed
+Configure miss: whether sigaction needs _POSIX_SOURCE
+Configure miss: whether sigaction needs _POSIX_SOURCE
+Configure miss: whether termios.h needs _POSIX_SOURCE
+Configure miss: whether termios.h needs _POSIX_SOURCE
+Configure miss: whether to add trace feature to all models
+Configure miss: whether to add trace feature to all models
+Configure miss: whether to use hashed database instead of directory/tree
+Configure miss: whether to use hashed database instead of directory/tree
+Configure miss: whether to use struct dirent64
+Configure miss: whether to use struct dirent64
+Configure miss: x86_64-generic-linux-gnu-infocmp
+Configure miss: x86_64-generic-linux-gnu-ld
+Configure miss: x86_64-generic-linux-gnu-tic
