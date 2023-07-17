@@ -1,1 +1,1 @@
---with-shared --with-termlib --enable-widec --without-progs
+--with-shared --with-termlib --enable-widec --enable-pc-files

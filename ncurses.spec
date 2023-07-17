@@ -7,7 +7,7 @@
 #
 Name     : ncurses
 Version  : 6.4.20230708
-Release  : 68
+Release  : 69
 URL      : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source0  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source1  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz.asc
@@ -139,7 +139,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689374040
+export SOURCE_DATE_EPOCH=1689627929
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -148,7 +148,7 @@ export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -f
 export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-%configure --disable-static --with-shared --with-termlib --enable-widec --without-progs
+%configure --disable-static --with-shared --with-termlib --enable-widec --enable-pc-files
 make  %{?_smp_mflags}
 
 pushd ../build32/
@@ -157,11 +157,11 @@ export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
 export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
 export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
 export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
-%configure --disable-static --with-shared --with-termlib --enable-widec --without-progs   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
+%configure --disable-static --with-shared --with-termlib --enable-widec --enable-pc-files   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1689374040
+export SOURCE_DATE_EPOCH=1689627929
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ncurses
 cp %{_builddir}/ncurses-6.4-20230708/Ada95/package/debian/copyright %{buildroot}/usr/share/package-licenses/ncurses/cec3ea2acda034031fbd6d677050853bd050a428 || :
@@ -194,7 +194,17 @@ popd
 
 %files bin
 %defattr(-,root,root,-)
+/usr/bin/captoinfo
+/usr/bin/clear
+/usr/bin/infocmp
+/usr/bin/infotocap
 /usr/bin/ncursesw6-config
+/usr/bin/reset
+/usr/bin/tabs
+/usr/bin/tic
+/usr/bin/toe
+/usr/bin/tput
+/usr/bin/tset
 
 %files data
 %defattr(-,root,root,-)
@@ -677,6 +687,7 @@ popd
 /usr/include/ncurses_dll.h
 /usr/include/panel.h
 /usr/include/term.h
+/usr/include/term_entry.h
 /usr/include/termcap.h
 /usr/include/unctrl.h
 /usr/lib64/libformw.so
@@ -684,6 +695,12 @@ popd
 /usr/lib64/libncursesw.so
 /usr/lib64/libpanelw.so
 /usr/lib64/libtinfow.so
+/usr/lib64/pkgconfig/formw.pc
+/usr/lib64/pkgconfig/menuw.pc
+/usr/lib64/pkgconfig/ncurses++w.pc
+/usr/lib64/pkgconfig/ncursesw.pc
+/usr/lib64/pkgconfig/panelw.pc
+/usr/lib64/pkgconfig/tinfow.pc
 /usr/share/man/man3/BC.3x
 /usr/share/man/man3/COLORS.3x
 /usr/share/man/man3/COLOR_PAIR.3x
@@ -1576,6 +1593,18 @@ popd
 /usr/lib32/libncursesw.so
 /usr/lib32/libpanelw.so
 /usr/lib32/libtinfow.so
+/usr/lib32/pkgconfig/32formw.pc
+/usr/lib32/pkgconfig/32menuw.pc
+/usr/lib32/pkgconfig/32ncurses++w.pc
+/usr/lib32/pkgconfig/32ncursesw.pc
+/usr/lib32/pkgconfig/32panelw.pc
+/usr/lib32/pkgconfig/32tinfow.pc
+/usr/lib32/pkgconfig/formw.pc
+/usr/lib32/pkgconfig/menuw.pc
+/usr/lib32/pkgconfig/ncurses++w.pc
+/usr/lib32/pkgconfig/ncursesw.pc
+/usr/lib32/pkgconfig/panelw.pc
+/usr/lib32/pkgconfig/tinfow.pc
 
 %files extras
 %defattr(-,root,root,-)
