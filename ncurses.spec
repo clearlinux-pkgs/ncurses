@@ -7,7 +7,7 @@
 #
 Name     : ncurses
 Version  : 6.4.20230708
-Release  : 73
+Release  : 74
 URL      : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source0  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source1  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz.asc
@@ -140,7 +140,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689744902
+export SOURCE_DATE_EPOCH=1689746987
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -182,7 +182,7 @@ export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1689744902
+export SOURCE_DATE_EPOCH=1689746987
 rm -rf %{buildroot}
 ## install_prepend content
 # there are set already during the build so having them set again during install causes issues
@@ -239,6 +239,7 @@ ln -sv libncurses.so %{buildroot}/usr/lib64/libcurses.so
 # make sure that anything linking against it links against libncursesw.so instead
 for lib in tic tinfo; do
 printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib64/lib${lib}.so"
+printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib64/lib${lib}w.so"
 ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib64/lib${lib}.so.$_ver"
 ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib64/lib${lib}w.so.$_ver"
 ln -sv ncursesw.pc %{buildroot}"/usr/lib64/pkgconfig/${lib}.pc"
@@ -261,6 +262,7 @@ ln -sv libncurses.so %{buildroot}/usr/lib32/libcurses.so
 # make sure that anything linking against it links against libncursesw.so instead
 for lib in tic tinfo; do
 printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib32/lib${lib}.so"
+printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib64/lib${lib}w.so"
 ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib32/lib${lib}.so.$_ver"
 ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib32/lib${lib}w.so.$_ver"
 ln -sv ncursesw.pc %{buildroot}"/usr/lib32/pkgconfig/${lib}.pc"
@@ -782,7 +784,9 @@ done
 /usr/lib64/libpanel.so
 /usr/lib64/libpanelw.so
 /usr/lib64/libtic.so
+/usr/lib64/libticw.so
 /usr/lib64/libtinfo.so
+/usr/lib64/libtinfow.so
 /usr/lib64/pkgconfig/form.pc
 /usr/lib64/pkgconfig/formw.pc
 /usr/lib64/pkgconfig/menu.pc
