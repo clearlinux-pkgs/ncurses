@@ -7,7 +7,7 @@
 #
 Name     : ncurses
 Version  : 6.4.20230708
-Release  : 71
+Release  : 72
 URL      : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source0  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source1  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz.asc
@@ -140,7 +140,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689738191
+export SOURCE_DATE_EPOCH=1689742720
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -149,15 +149,17 @@ export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -f
 export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-%configure --disable-static --with-shared \
---with-termlib \
+%configure --disable-static --disable-root-access \
+--disable-root-environ \
+--with-shared \
 --enable-widec \
 --enable-pc-files \
---with-progs \
 --with-cxx-shared \
 --enable-const \
 --enable-ext-colors \
---with-versioned-syms
+--with-versioned-syms \
+--with-cxx-binding \
+--with-cxx-shared
 make  %{?_smp_mflags}
 
 pushd ../build32/
@@ -166,19 +168,21 @@ export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
 export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
 export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
 export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
-%configure --disable-static --with-shared \
---with-termlib \
+%configure --disable-static --disable-root-access \
+--disable-root-environ \
+--with-shared \
 --enable-widec \
 --enable-pc-files \
---with-progs \
 --with-cxx-shared \
 --enable-const \
 --enable-ext-colors \
---with-versioned-syms   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
+--with-versioned-syms \
+--with-cxx-binding \
+--with-cxx-shared   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1689738191
+export SOURCE_DATE_EPOCH=1689742720
 rm -rf %{buildroot}
 ## install_prepend content
 # there are set already during the build so having them set again during install causes issues
@@ -775,7 +779,6 @@ done
 /usr/lib64/libpanelw.so
 /usr/lib64/libtic.so
 /usr/lib64/libtinfo.so
-/usr/lib64/libtinfow.so
 /usr/lib64/pkgconfig/form.pc
 /usr/lib64/pkgconfig/formw.pc
 /usr/lib64/pkgconfig/menu.pc
@@ -788,7 +791,6 @@ done
 /usr/lib64/pkgconfig/panelw.pc
 /usr/lib64/pkgconfig/tic.pc
 /usr/lib64/pkgconfig/tinfo.pc
-/usr/lib64/pkgconfig/tinfow.pc
 /usr/share/man/man3/BC.3x
 /usr/share/man/man3/COLORS.3x
 /usr/share/man/man3/COLOR_PAIR.3x
@@ -1690,13 +1692,11 @@ done
 /usr/lib32/libpanelw.so
 /usr/lib32/libtic.so
 /usr/lib32/libtinfo.so
-/usr/lib32/libtinfow.so
 /usr/lib32/pkgconfig/32formw.pc
 /usr/lib32/pkgconfig/32menuw.pc
 /usr/lib32/pkgconfig/32ncurses++w.pc
 /usr/lib32/pkgconfig/32ncursesw.pc
 /usr/lib32/pkgconfig/32panelw.pc
-/usr/lib32/pkgconfig/32tinfow.pc
 /usr/lib32/pkgconfig/form.pc
 /usr/lib32/pkgconfig/formw.pc
 /usr/lib32/pkgconfig/menu.pc
@@ -1709,7 +1709,6 @@ done
 /usr/lib32/pkgconfig/panelw.pc
 /usr/lib32/pkgconfig/tic.pc
 /usr/lib32/pkgconfig/tinfo.pc
-/usr/lib32/pkgconfig/tinfow.pc
 
 %files extras
 %defattr(-,root,root,-)
@@ -4125,8 +4124,6 @@ done
 /usr/lib64/libpanelw.so.6.4
 /usr/lib64/libtic.so.6
 /usr/lib64/libtinfo.so.6
-/usr/lib64/libtinfow.so.6
-/usr/lib64/libtinfow.so.6.4
 
 %files lib32
 %defattr(-,root,root,-)
@@ -4142,8 +4139,6 @@ done
 /usr/lib32/libpanelw.so.6.4
 /usr/lib32/libtic.so.6
 /usr/lib32/libtinfo.so.6
-/usr/lib32/libtinfow.so.6
-/usr/lib32/libtinfow.so.6.4
 
 %files license
 %defattr(0644,root,root,0755)
