@@ -1,0 +1,45 @@
+# From arch's ncurses package
+# Make things trying to link to the narrrow version link to the wide version
+# also create a fake libcurses for packages that really think they want that
+# Update with major api version changes
+_ver=6
+
+
+for library in ncurses ncurses++ form panel menu; do
+  printf 'INPUT(-l%sw)\n' "${library}" > %{buildroot}/usr/lib64/lib"${library}".so
+  ln -sv "${library}w.pc" %{buildroot}/usr/lib64/pkgconfig/"${library}".pc
+done
+
+for l in %{buildroot}/usr/lib64/libcursesw.so; do
+printf 'INPUT(-lncursesw)' > $l
+done
+
+ln -sv libncurses.so %{buildroot}/usr/lib64/libcurses.so
+
+# tic and ticinfo functionality is built in by default
+# make sure that anything linking against it links against libncursesw.so instead
+for lib in tic tinfo; do
+  printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib64/lib${lib}.so"
+  ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib64/lib${lib}.so.$_ver"
+  ln -sv ncursesw.pc %{buildroot}"/usr/lib64/pkgconfig/${lib}.pc"
+done
+
+# and for 32bit
+for library in ncurses ncurses++ form panel menu; do
+  printf 'INPUT(-l%sw)\n' "${library}" > %{buildroot}/usr/lib32/lib"${library}".so
+  ln -sv "${library}w.pc" %{buildroot}/usr/lib32/pkgconfig/"${library}".pc
+done
+
+for l in %{buildroot}/usr/lib32/libcursesw.so; do
+printf 'INPUT(-lncursesw)' > $l
+done
+
+ln -sv libncurses.so %{buildroot}/usr/lib32/libcurses.so
+
+# tic and ticinfo functionality is built in by default
+# make sure that anything linking against it links against libncursesw.so instead
+for lib in tic tinfo; do
+  printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib32/lib${lib}.so"
+  ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib32/lib${lib}.so.$_ver"
+  ln -sv ncursesw.pc %{buildroot}"/usr/lib32/pkgconfig/${lib}.pc"
+done

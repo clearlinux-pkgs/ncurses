@@ -1,1 +1,9 @@
---with-shared --with-termlib --enable-widec --enable-pc-files
+--with-shared
+--with-termlib
+--enable-widec
+--enable-pc-files
+--with-progs
+--with-cxx-shared
+--enable-const
+--enable-ext-colors
+--with-versioned-syms

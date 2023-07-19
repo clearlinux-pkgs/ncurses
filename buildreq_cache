@@ -2,4 +2,5 @@
 cppcheck
 ctags
 gpm-dev
+ncurses-dev
 pkg-config

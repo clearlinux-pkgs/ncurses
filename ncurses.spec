@@ -7,7 +7,7 @@
 #
 Name     : ncurses
 Version  : 6.4.20230708
-Release  : 70
+Release  : 71
 URL      : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source0  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source1  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz.asc
@@ -29,6 +29,7 @@ BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
 BuildRequires : gpm-dev
 BuildRequires : ncurses
+BuildRequires : ncurses-dev
 BuildRequires : pkg-config
 # Suppress stripping binaries
 %define __strip /bin/true
@@ -139,7 +140,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689699941
+export SOURCE_DATE_EPOCH=1689738191
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -148,7 +149,15 @@ export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -f
 export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-%configure --disable-static --with-shared --with-termlib --enable-widec --enable-pc-files
+%configure --disable-static --with-shared \
+--with-termlib \
+--enable-widec \
+--enable-pc-files \
+--with-progs \
+--with-cxx-shared \
+--enable-const \
+--enable-ext-colors \
+--with-versioned-syms
 make  %{?_smp_mflags}
 
 pushd ../build32/
@@ -157,12 +166,27 @@ export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
 export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
 export CXXFLAGS="${CXXFLAGS}${CXXFLAGS:+ }-m32 -mstackrealign"
 export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
-%configure --disable-static --with-shared --with-termlib --enable-widec --enable-pc-files   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
+%configure --disable-static --with-shared \
+--with-termlib \
+--enable-widec \
+--enable-pc-files \
+--with-progs \
+--with-cxx-shared \
+--enable-const \
+--enable-ext-colors \
+--with-versioned-syms   --libdir=/usr/lib32 --build=i686-generic-linux-gnu --host=i686-generic-linux-gnu --target=i686-clr-linux-gnu
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1689699941
+export SOURCE_DATE_EPOCH=1689738191
 rm -rf %{buildroot}
+## install_prepend content
+# there are set already during the build so having them set again during install causes issues
+export ASFLAGS=
+export CFLAGS=
+export CXXFLAGS=
+export LDFLAGS=
+## install_prepend end
 mkdir -p %{buildroot}/usr/share/package-licenses/ncurses
 cp %{_builddir}/ncurses-6.4-20230708/Ada95/package/debian/copyright %{buildroot}/usr/share/package-licenses/ncurses/cec3ea2acda034031fbd6d677050853bd050a428 || :
 cp %{_builddir}/ncurses-6.4-20230708/COPYING %{buildroot}/usr/share/package-licenses/ncurses/34ae8c3533285526817ff69973baf84e687d71d1 || :
@@ -188,6 +212,53 @@ popd
 fi
 popd
 %make_install
+## install_append content
+# From arch's ncurses package
+# Make things trying to link to the narrrow version link to the wide version
+# also create a fake libcurses for packages that really think they want that
+# Update with major api version changes
+_ver=6
+
+
+for library in ncurses ncurses++ form panel menu; do
+printf 'INPUT(-l%sw)\n' "${library}" > %{buildroot}/usr/lib64/lib"${library}".so
+ln -sv "${library}w.pc" %{buildroot}/usr/lib64/pkgconfig/"${library}".pc
+done
+
+for l in %{buildroot}/usr/lib64/libcursesw.so; do
+printf 'INPUT(-lncursesw)' > $l
+done
+
+ln -sv libncurses.so %{buildroot}/usr/lib64/libcurses.so
+
+# tic and ticinfo functionality is built in by default
+# make sure that anything linking against it links against libncursesw.so instead
+for lib in tic tinfo; do
+printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib64/lib${lib}.so"
+ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib64/lib${lib}.so.$_ver"
+ln -sv ncursesw.pc %{buildroot}"/usr/lib64/pkgconfig/${lib}.pc"
+done
+
+# and for 32bit
+for library in ncurses ncurses++ form panel menu; do
+printf 'INPUT(-l%sw)\n' "${library}" > %{buildroot}/usr/lib32/lib"${library}".so
+ln -sv "${library}w.pc" %{buildroot}/usr/lib32/pkgconfig/"${library}".pc
+done
+
+for l in %{buildroot}/usr/lib32/libcursesw.so; do
+printf 'INPUT(-lncursesw)' > $l
+done
+
+ln -sv libncurses.so %{buildroot}/usr/lib32/libcurses.so
+
+# tic and ticinfo functionality is built in by default
+# make sure that anything linking against it links against libncursesw.so instead
+for lib in tic tinfo; do
+printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib32/lib${lib}.so"
+ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib32/lib${lib}.so.$_ver"
+ln -sv ncursesw.pc %{buildroot}"/usr/lib32/pkgconfig/${lib}.pc"
+done
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -690,16 +761,33 @@ popd
 /usr/include/term_entry.h
 /usr/include/termcap.h
 /usr/include/unctrl.h
+/usr/lib64/libcurses.so
+/usr/lib64/libcursesw.so
+/usr/lib64/libform.so
 /usr/lib64/libformw.so
+/usr/lib64/libmenu.so
 /usr/lib64/libmenuw.so
+/usr/lib64/libncurses++.so
+/usr/lib64/libncurses++w.so
+/usr/lib64/libncurses.so
 /usr/lib64/libncursesw.so
+/usr/lib64/libpanel.so
 /usr/lib64/libpanelw.so
+/usr/lib64/libtic.so
+/usr/lib64/libtinfo.so
 /usr/lib64/libtinfow.so
+/usr/lib64/pkgconfig/form.pc
 /usr/lib64/pkgconfig/formw.pc
+/usr/lib64/pkgconfig/menu.pc
 /usr/lib64/pkgconfig/menuw.pc
+/usr/lib64/pkgconfig/ncurses++.pc
 /usr/lib64/pkgconfig/ncurses++w.pc
+/usr/lib64/pkgconfig/ncurses.pc
 /usr/lib64/pkgconfig/ncursesw.pc
+/usr/lib64/pkgconfig/panel.pc
 /usr/lib64/pkgconfig/panelw.pc
+/usr/lib64/pkgconfig/tic.pc
+/usr/lib64/pkgconfig/tinfo.pc
 /usr/lib64/pkgconfig/tinfow.pc
 /usr/share/man/man3/BC.3x
 /usr/share/man/man3/COLORS.3x
@@ -1588,10 +1676,20 @@ popd
 
 %files dev32
 %defattr(-,root,root,-)
+/usr/lib32/libcurses.so
+/usr/lib32/libcursesw.so
+/usr/lib32/libform.so
 /usr/lib32/libformw.so
+/usr/lib32/libmenu.so
 /usr/lib32/libmenuw.so
+/usr/lib32/libncurses++.so
+/usr/lib32/libncurses++w.so
+/usr/lib32/libncurses.so
 /usr/lib32/libncursesw.so
+/usr/lib32/libpanel.so
 /usr/lib32/libpanelw.so
+/usr/lib32/libtic.so
+/usr/lib32/libtinfo.so
 /usr/lib32/libtinfow.so
 /usr/lib32/pkgconfig/32formw.pc
 /usr/lib32/pkgconfig/32menuw.pc
@@ -1599,11 +1697,18 @@ popd
 /usr/lib32/pkgconfig/32ncursesw.pc
 /usr/lib32/pkgconfig/32panelw.pc
 /usr/lib32/pkgconfig/32tinfow.pc
+/usr/lib32/pkgconfig/form.pc
 /usr/lib32/pkgconfig/formw.pc
+/usr/lib32/pkgconfig/menu.pc
 /usr/lib32/pkgconfig/menuw.pc
+/usr/lib32/pkgconfig/ncurses++.pc
 /usr/lib32/pkgconfig/ncurses++w.pc
+/usr/lib32/pkgconfig/ncurses.pc
 /usr/lib32/pkgconfig/ncursesw.pc
+/usr/lib32/pkgconfig/panel.pc
 /usr/lib32/pkgconfig/panelw.pc
+/usr/lib32/pkgconfig/tic.pc
+/usr/lib32/pkgconfig/tinfo.pc
 /usr/lib32/pkgconfig/tinfow.pc
 
 %files extras
@@ -4012,10 +4117,14 @@ popd
 /usr/lib64/libformw.so.6.4
 /usr/lib64/libmenuw.so.6
 /usr/lib64/libmenuw.so.6.4
+/usr/lib64/libncurses++w.so.6
+/usr/lib64/libncurses++w.so.6.4
 /usr/lib64/libncursesw.so.6
 /usr/lib64/libncursesw.so.6.4
 /usr/lib64/libpanelw.so.6
 /usr/lib64/libpanelw.so.6.4
+/usr/lib64/libtic.so.6
+/usr/lib64/libtinfo.so.6
 /usr/lib64/libtinfow.so.6
 /usr/lib64/libtinfow.so.6.4
 
@@ -4025,10 +4134,14 @@ popd
 /usr/lib32/libformw.so.6.4
 /usr/lib32/libmenuw.so.6
 /usr/lib32/libmenuw.so.6.4
+/usr/lib32/libncurses++w.so.6
+/usr/lib32/libncurses++w.so.6.4
 /usr/lib32/libncursesw.so.6
 /usr/lib32/libncursesw.so.6.4
 /usr/lib32/libpanelw.so.6
 /usr/lib32/libpanelw.so.6.4
+/usr/lib32/libtic.so.6
+/usr/lib32/libtinfo.so.6
 /usr/lib32/libtinfow.so.6
 /usr/lib32/libtinfow.so.6.4
 

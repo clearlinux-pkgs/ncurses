@@ -1,0 +1,5 @@
+# there are set already during the build so having them set again during install causes issues
+export ASFLAGS=
+export CFLAGS=
+export CXXFLAGS=
+export LDFLAGS=
