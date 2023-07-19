@@ -21,7 +21,9 @@ ln -sv libncurses.so %{buildroot}/usr/lib64/libcurses.so
 for lib in tic tinfo; do
   printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib64/lib${lib}.so"
   ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib64/lib${lib}.so.$_ver"
+  ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib64/lib${lib}w.so.$_ver"
   ln -sv ncursesw.pc %{buildroot}"/usr/lib64/pkgconfig/${lib}.pc"
+  ln -sv ncursesw.pc %{buildroot}"/usr/lib64/pkgconfig/${lib}w.pc"
 done
 
 # and for 32bit
@@ -41,5 +43,7 @@ ln -sv libncurses.so %{buildroot}/usr/lib32/libcurses.so
 for lib in tic tinfo; do
   printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib32/lib${lib}.so"
   ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib32/lib${lib}.so.$_ver"
+  ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib32/lib${lib}w.so.$_ver"
   ln -sv ncursesw.pc %{buildroot}"/usr/lib32/pkgconfig/${lib}.pc"
+  ln -sv ncursesw.pc %{buildroot}"/usr/lib32/pkgconfig/${lib}w.pc"
 done

@@ -7,7 +7,7 @@
 #
 Name     : ncurses
 Version  : 6.4.20230708
-Release  : 72
+Release  : 73
 URL      : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source0  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source1  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz.asc
@@ -140,7 +140,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689742720
+export SOURCE_DATE_EPOCH=1689744902
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -182,7 +182,7 @@ export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1689742720
+export SOURCE_DATE_EPOCH=1689744902
 rm -rf %{buildroot}
 ## install_prepend content
 # there are set already during the build so having them set again during install causes issues
@@ -240,7 +240,9 @@ ln -sv libncurses.so %{buildroot}/usr/lib64/libcurses.so
 for lib in tic tinfo; do
 printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib64/lib${lib}.so"
 ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib64/lib${lib}.so.$_ver"
+ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib64/lib${lib}w.so.$_ver"
 ln -sv ncursesw.pc %{buildroot}"/usr/lib64/pkgconfig/${lib}.pc"
+ln -sv ncursesw.pc %{buildroot}"/usr/lib64/pkgconfig/${lib}w.pc"
 done
 
 # and for 32bit
@@ -260,7 +262,9 @@ ln -sv libncurses.so %{buildroot}/usr/lib32/libcurses.so
 for lib in tic tinfo; do
 printf "INPUT(libncursesw.so.%s)\n" $_ver > %{buildroot}"/usr/lib32/lib${lib}.so"
 ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib32/lib${lib}.so.$_ver"
+ln -sv libncursesw.so.$_ver %{buildroot}"/usr/lib32/lib${lib}w.so.$_ver"
 ln -sv ncursesw.pc %{buildroot}"/usr/lib32/pkgconfig/${lib}.pc"
+ln -sv ncursesw.pc %{buildroot}"/usr/lib32/pkgconfig/${lib}w.pc"
 done
 ## install_append end
 
@@ -790,7 +794,9 @@ done
 /usr/lib64/pkgconfig/panel.pc
 /usr/lib64/pkgconfig/panelw.pc
 /usr/lib64/pkgconfig/tic.pc
+/usr/lib64/pkgconfig/ticw.pc
 /usr/lib64/pkgconfig/tinfo.pc
+/usr/lib64/pkgconfig/tinfow.pc
 /usr/share/man/man3/BC.3x
 /usr/share/man/man3/COLORS.3x
 /usr/share/man/man3/COLOR_PAIR.3x
@@ -1708,7 +1714,9 @@ done
 /usr/lib32/pkgconfig/panel.pc
 /usr/lib32/pkgconfig/panelw.pc
 /usr/lib32/pkgconfig/tic.pc
+/usr/lib32/pkgconfig/ticw.pc
 /usr/lib32/pkgconfig/tinfo.pc
+/usr/lib32/pkgconfig/tinfow.pc
 
 %files extras
 %defattr(-,root,root,-)
@@ -4123,7 +4131,9 @@ done
 /usr/lib64/libpanelw.so.6
 /usr/lib64/libpanelw.so.6.4
 /usr/lib64/libtic.so.6
+/usr/lib64/libticw.so.6
 /usr/lib64/libtinfo.so.6
+/usr/lib64/libtinfow.so.6
 
 %files lib32
 %defattr(-,root,root,-)
@@ -4138,7 +4148,9 @@ done
 /usr/lib32/libpanelw.so.6
 /usr/lib32/libpanelw.so.6.4
 /usr/lib32/libtic.so.6
+/usr/lib32/libticw.so.6
 /usr/lib32/libtinfo.so.6
+/usr/lib32/libtinfow.so.6
 
 %files license
 %defattr(0644,root,root,0755)
