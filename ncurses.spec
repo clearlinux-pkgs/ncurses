@@ -7,7 +7,7 @@
 #
 Name     : ncurses
 Version  : 6.4.20230708
-Release  : 75
+Release  : 79
 URL      : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source0  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz
 Source1  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.4-20230708.tgz.asc
@@ -148,7 +148,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1689890058
+export SOURCE_DATE_EPOCH=1690218956
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -190,7 +190,7 @@ export LDFLAGS="${LDFLAGS}${LDFLAGS:+ }-m32 -mstackrealign"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1689890058
+export SOURCE_DATE_EPOCH=1690218956
 rm -rf %{buildroot}
 ## install_prepend content
 # there are set already during the build so having them set again during install causes issues
@@ -797,8 +797,6 @@ done
 /usr/lib64/pkgconfig/formw.pc
 /usr/lib64/pkgconfig/menu.pc
 /usr/lib64/pkgconfig/menuw.pc
-/usr/lib64/pkgconfig/ncurses++.pc
-/usr/lib64/pkgconfig/ncurses++w.pc
 /usr/lib64/pkgconfig/ncurses.pc
 /usr/lib64/pkgconfig/ncursesw.pc
 /usr/lib64/pkgconfig/panel.pc
@@ -4134,6 +4132,8 @@ done
 /usr/lib64/libncurses++w.so
 /usr/lib64/libncurses++w.so.6
 /usr/lib64/libncurses++w.so.6.4
+/usr/lib64/pkgconfig/ncurses++.pc
+/usr/lib64/pkgconfig/ncurses++w.pc
 
 %files lib
 %defattr(-,root,root,-)
