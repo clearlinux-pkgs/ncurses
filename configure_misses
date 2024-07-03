@@ -84,18 +84,6 @@ Configure miss: if you want hard-tabs code
 Configure miss: if you want limited support for xmc
 Configure miss: if you want limited support for xmc
 Configure miss: if you want limited support for xmc
-Configure miss: if you want opaque curses-library structures
-Configure miss: if you want opaque curses-library structures
-Configure miss: if you want opaque curses-library structures
-Configure miss: if you want opaque form-library structures
-Configure miss: if you want opaque form-library structures
-Configure miss: if you want opaque form-library structures
-Configure miss: if you want opaque menu-library structures
-Configure miss: if you want opaque menu-library structures
-Configure miss: if you want opaque menu-library structures
-Configure miss: if you want opaque panel-library structures
-Configure miss: if you want opaque panel-library structures
-Configure miss: if you want opaque panel-library structures
 Configure miss: if you want reentrant code
 Configure miss: if you want reentrant code
 Configure miss: if you want reentrant code
@@ -117,6 +105,9 @@ Configure miss: if you want to build profiling libraries
 Configure miss: if you want to build with terminal-driver
 Configure miss: if you want to build with terminal-driver
 Configure miss: if you want to build with terminal-driver
+Configure miss: if you want to check screensize of serial terminals
+Configure miss: if you want to check screensize of serial terminals
+Configure miss: if you want to check screensize of serial terminals
 Configure miss: if you want to disable extra LDFLAGS for package-scripts
 Configure miss: if you want to disable extra LDFLAGS for package-scripts
 Configure miss: if you want to disable extra LDFLAGS for package-scripts
@@ -164,9 +155,6 @@ Configure miss: if you want to use dmalloc for testing
 Configure miss: if you want to use gcc -fvisibility option
 Configure miss: if you want to use gcc -fvisibility option
 Configure miss: if you want to use gcc -fvisibility option
-Configure miss: if you want to use signed Boolean array in term.h
-Configure miss: if you want to use signed Boolean array in term.h
-Configure miss: if you want to use signed Boolean array in term.h
 Configure miss: if you want to use valgrind for testing
 Configure miss: if you want to use valgrind for testing
 Configure miss: if you want to use valgrind for testing
@@ -194,9 +182,12 @@ Configure miss: opendir in -ldir
 Configure miss: sigvec
 Configure miss: sigvec
 Configure miss: sigvec
-Configure miss: suffix to add to pc-files
-Configure miss: suffix to add to pc-files
-Configure miss: suffix to add to pc-files
+Configure miss: special defines needed for etip.h
+Configure miss: special defines needed for etip.h
+Configure miss: special defines needed for etip.h
+Configure miss: suffix to add to pkg-config files
+Configure miss: suffix to add to pkg-config files
+Configure miss: suffix to add to pkg-config files
 Configure miss: sys/termio.h
 Configure miss: sys/termio.h
 Configure miss: sys/termio.h
@@ -218,6 +209,9 @@ Configure miss: whether to add trace feature to all models
 Configure miss: whether to use hashed database instead of directory/tree
 Configure miss: whether to use hashed database instead of directory/tree
 Configure miss: whether to use hashed database instead of directory/tree
+Configure miss: whether to use signed chars for Boolean array in term.h
+Configure miss: whether to use signed chars for Boolean array in term.h
+Configure miss: whether to use signed chars for Boolean array in term.h
 Configure miss: whether to use struct dirent64
 Configure miss: whether to use struct dirent64
 Configure miss: whether to use struct dirent64
