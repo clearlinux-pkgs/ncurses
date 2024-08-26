@@ -27,9 +27,9 @@ Configure miss: gprconfig
 Configure miss: i686-generic-linux-gnu-infocmp
 Configure miss: i686-generic-linux-gnu-ld
 Configure miss: i686-generic-linux-gnu-tic
-Configure miss: if /usr/lib64/ccache/bin/g++ accepts parameter initialization
-Configure miss: if /usr/lib64/ccache/bin/g++ accepts parameter initialization
-Configure miss: if /usr/lib64/ccache/bin/g++ accepts parameter initialization
+Configure miss: if /usr/bin/g++ accepts parameter initialization
+Configure miss: if /usr/bin/g++ accepts parameter initialization
+Configure miss: if /usr/bin/g++ accepts parameter initialization
 Configure miss: if RCS identifiers should be compiled-in
 Configure miss: if RCS identifiers should be compiled-in
 Configure miss: if RCS identifiers should be compiled-in
@@ -45,6 +45,9 @@ Configure miss: if external errno exists
 Configure miss: if install needs to be told about ownership
 Configure miss: if install needs to be told about ownership
 Configure miss: if install needs to be told about ownership
+Configure miss: if installation directory prefix should be merged
+Configure miss: if installation directory prefix should be merged
+Configure miss: if installation directory prefix should be merged
 Configure miss: if rpath option should be used
 Configure miss: if rpath option should be used
 Configure miss: if rpath option should be used
@@ -144,6 +147,7 @@ Configure miss: if you want to turn on gcc warnings
 Configure miss: if you want to use C11 _Noreturn feature
 Configure miss: if you want to use C11 _Noreturn feature
 Configure miss: if you want to use C11 _Noreturn feature
+Configure miss: if you want to use PCRE2 for regular-expressions
 Configure miss: if you want to use PCRE2 for regular-expressions
 Configure miss: if you want to use PCRE2 for regular-expressions
 Configure miss: if you want to use dbmalloc for testing
