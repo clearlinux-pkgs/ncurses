@@ -185,9 +185,6 @@ Configure miss: opendir in -ldir
 Configure miss: sigvec
 Configure miss: sigvec
 Configure miss: sigvec
-Configure miss: special defines needed for etip.h
-Configure miss: special defines needed for etip.h
-Configure miss: special defines needed for etip.h
 Configure miss: suffix to add to pkg-config files
 Configure miss: suffix to add to pkg-config files
 Configure miss: suffix to add to pkg-config files

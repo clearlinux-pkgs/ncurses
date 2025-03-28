@@ -9,11 +9,11 @@
 #
 %define keepstatic 1
 Name     : ncurses
-Version  : 6.5.20241102
-Release  : 157
-URL      : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.5-20241102.tgz
-Source0  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.5-20241102.tgz
-Source1  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.5-20241102.tgz.asc
+Version  : 6.5.20250322
+Release  : 158
+URL      : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.5-20250322.tgz
+Source0  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.5-20250322.tgz
+Source1  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.5-20250322.tgz.asc
 Source2  : CC2AF4472167BE03.pkey
 Summary  : shared libraries for terminal handling
 Group    : Development/Tools
@@ -21,7 +21,6 @@ License  : MIT X11
 Requires: ncurses-bin = %{version}-%{release}
 Requires: ncurses-data = %{version}-%{release}
 Requires: ncurses-lib = %{version}-%{release}
-Requires: ncurses-license = %{version}-%{release}
 Requires: ncurses-man = %{version}-%{release}
 BuildRequires : buildreq-configure
 BuildRequires : cppcheck
@@ -49,7 +48,6 @@ This package is used for testing ABI %{MY_ABI}.
 Summary: bin components for the ncurses package.
 Group: Binaries
 Requires: ncurses-data = %{version}-%{release}
-Requires: ncurses-license = %{version}-%{release}
 
 %description bin
 bin components for the ncurses package.
@@ -108,7 +106,6 @@ extras-plusplus components for the ncurses package.
 Summary: lib components for the ncurses package.
 Group: Libraries
 Requires: ncurses-data = %{version}-%{release}
-Requires: ncurses-license = %{version}-%{release}
 
 %description lib
 lib components for the ncurses package.
@@ -118,18 +115,9 @@ lib components for the ncurses package.
 Summary: lib32 components for the ncurses package.
 Group: Default
 Requires: ncurses-data = %{version}-%{release}
-Requires: ncurses-license = %{version}-%{release}
 
 %description lib32
 lib32 components for the ncurses package.
-
-
-%package license
-Summary: license components for the ncurses package.
-Group: Default
-
-%description license
-license components for the ncurses package.
 
 
 %package man
@@ -164,13 +152,13 @@ chmod 700 .gnupg
 gpg --homedir .gnupg --import %{SOURCE2}
 gpg --homedir .gnupg --status-fd 1 --verify %{SOURCE1} %{SOURCE0} > gpg.status
 grep -E '^\[GNUPG:\] (GOODSIG|EXPKEYSIG) CC2AF4472167BE03' gpg.status
-%setup -q -n ncurses-6.5-20241102
-cd %{_builddir}/ncurses-6.5-20241102
+%setup -q -n ncurses-6.5-20250322
+cd %{_builddir}/ncurses-6.5-20250322
 pushd ..
-cp -a ncurses-6.5-20241102 build32
+cp -a ncurses-6.5-20250322 build32
 popd
 pushd ..
-cp -a ncurses-6.5-20241102 buildavx2
+cp -a ncurses-6.5-20250322 buildavx2
 popd
 
 %build
@@ -178,7 +166,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1743173763
+export SOURCE_DATE_EPOCH=1743174519
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -262,7 +250,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1743173763
+export SOURCE_DATE_EPOCH=1743174519
 rm -rf %{buildroot}
 ## install_prepend content
 # there are set already during the build so having them set again during install causes issues
@@ -271,15 +259,6 @@ export CFLAGS=
 export CXXFLAGS=
 export LDFLAGS=
 ## install_prepend end
-mkdir -p %{buildroot}/usr/share/package-licenses/ncurses
-cp %{_builddir}/ncurses-6.5-20241102/Ada95/package/debian/copyright %{buildroot}/usr/share/package-licenses/ncurses/bcb5d1ead878a7032473ac2e24f2fe2ea36e9a83 || :
-cp %{_builddir}/ncurses-6.5-20241102/COPYING %{buildroot}/usr/share/package-licenses/ncurses/7610a7e52922a5bc70ec386b7d1102fe38c3255f || :
-cp %{_builddir}/ncurses-6.5-20241102/package/debian-mingw/copyright %{buildroot}/usr/share/package-licenses/ncurses/89e5f1ea217e82539e0cb030544efc9e96ccddb7 || :
-cp %{_builddir}/ncurses-6.5-20241102/package/debian-mingw64/copyright %{buildroot}/usr/share/package-licenses/ncurses/89e5f1ea217e82539e0cb030544efc9e96ccddb7 || :
-cp %{_builddir}/ncurses-6.5-20241102/package/debian/copyright %{buildroot}/usr/share/package-licenses/ncurses/89e5f1ea217e82539e0cb030544efc9e96ccddb7 || :
-cp %{_builddir}/ncurses-6.5-20241102/test/package/debian-mingw/copyright %{buildroot}/usr/share/package-licenses/ncurses/3fbcbff4349e85b7a9571a56440b01a08e460542 || :
-cp %{_builddir}/ncurses-6.5-20241102/test/package/debian-mingw64/copyright %{buildroot}/usr/share/package-licenses/ncurses/3fbcbff4349e85b7a9571a56440b01a08e460542 || :
-cp %{_builddir}/ncurses-6.5-20241102/test/package/debian/copyright %{buildroot}/usr/share/package-licenses/ncurses/3fbcbff4349e85b7a9571a56440b01a08e460542 || :
 export GOAMD64=v2
 pushd ../build32/
 %make_install32
@@ -470,6 +449,7 @@ done
 /usr/share/terminfo/f/foot
 /usr/share/terminfo/f/foot+base
 /usr/share/terminfo/f/foot-direct
+/usr/share/terminfo/g/ghostty
 /usr/share/terminfo/k/kitty
 /usr/share/terminfo/k/kitty+common
 /usr/share/terminfo/k/kitty+setal
@@ -489,6 +469,7 @@ done
 /usr/share/terminfo/l/linux
 /usr/share/terminfo/l/linux+decid
 /usr/share/terminfo/l/linux+kbs
+/usr/share/terminfo/l/linux+lockeys
 /usr/share/terminfo/l/linux+sfkeys
 /usr/share/terminfo/l/linux-16color
 /usr/share/terminfo/l/linux-basic
@@ -630,6 +611,7 @@ done
 /usr/share/terminfo/s/st-0.6
 /usr/share/terminfo/s/st-0.7
 /usr/share/terminfo/s/st-0.8
+/usr/share/terminfo/s/st-0.8.5
 /usr/share/terminfo/s/st-16color
 /usr/share/terminfo/s/st-256color
 /usr/share/terminfo/s/st-direct
@@ -707,6 +689,8 @@ done
 /usr/share/terminfo/v/vt220+cvis8
 /usr/share/terminfo/v/vt220+keypad
 /usr/share/terminfo/v/vt220+pcedit
+/usr/share/terminfo/v/vt220+sfkeys
+/usr/share/terminfo/v/vt220+ufkeys
 /usr/share/terminfo/v/vt220+vtedit
 /usr/share/terminfo/v/vt220-8
 /usr/share/terminfo/v/vt220-8bit
@@ -746,8 +730,10 @@ done
 /usr/share/terminfo/v/vt52+keypad
 /usr/share/terminfo/v/vt52-basic
 /usr/share/terminfo/v/vt520
+/usr/share/terminfo/v/vt520-w
 /usr/share/terminfo/v/vt520ansi
 /usr/share/terminfo/v/vt525
+/usr/share/terminfo/v/vt525-w
 /usr/share/terminfo/v/vt61
 /usr/share/terminfo/v/vt61.5
 /usr/share/terminfo/v/vte
@@ -799,6 +785,8 @@ done
 /usr/share/terminfo/x/xterm+pcf0
 /usr/share/terminfo/x/xterm+pcf2
 /usr/share/terminfo/x/xterm+pcfkeys
+/usr/share/terminfo/x/xterm+r5+fkeys
+/usr/share/terminfo/x/xterm+r5+lockeys
 /usr/share/terminfo/x/xterm+r6f2
 /usr/share/terminfo/x/xterm+sl
 /usr/share/terminfo/x/xterm+sl-alt
@@ -910,7 +898,9 @@ done
 /usr/lib64/pkgconfig/ticw.pc
 /usr/lib64/pkgconfig/tinfo.pc
 /usr/lib64/pkgconfig/tinfow.pc
+/usr/share/man/man3/A_COLOR.3x
 /usr/share/man/man3/BC.3x
+/usr/share/man/man3/CCHARW_MAX.3x
 /usr/share/man/man3/COLORS.3x
 /usr/share/man/man3/COLOR_BLACK.3x
 /usr/share/man/man3/COLOR_BLUE.3x
@@ -927,6 +917,7 @@ done
 /usr/share/man/man3/ESCDELAY.3x
 /usr/share/man/man3/FALSE.3x
 /usr/share/man/man3/LINES.3x
+/usr/share/man/man3/MEVENT.3x
 /usr/share/man/man3/NCURSES_SCREEN_CB.3x
 /usr/share/man/man3/NCURSES_WINDOW_CB.3x
 /usr/share/man/man3/OK.3x
@@ -1365,6 +1356,7 @@ done
 /usr/share/man/man3/mitem_userptr.3x
 /usr/share/man/man3/mitem_value.3x
 /usr/share/man/man3/mitem_visible.3x
+/usr/share/man/man3/mmask_t.3x
 /usr/share/man/man3/mouse_trafo.3x
 /usr/share/man/man3/mouseinterval.3x
 /usr/share/man/man3/mouseinterval_sp.3x
@@ -4305,13 +4297,6 @@ done
 /usr/lib32/libticw.so.6
 /usr/lib32/libtinfo.so.6
 /usr/lib32/libtinfow.so.6
-
-%files license
-%defattr(0644,root,root,0755)
-/usr/share/package-licenses/ncurses/3fbcbff4349e85b7a9571a56440b01a08e460542
-/usr/share/package-licenses/ncurses/7610a7e52922a5bc70ec386b7d1102fe38c3255f
-/usr/share/package-licenses/ncurses/89e5f1ea217e82539e0cb030544efc9e96ccddb7
-/usr/share/package-licenses/ncurses/bcb5d1ead878a7032473ac2e24f2fe2ea36e9a83
 
 %files man
 %defattr(0644,root,root,0755)
