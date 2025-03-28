@@ -149,7 +149,6 @@ Configure miss: if you want to use C11 _Noreturn feature
 Configure miss: if you want to use C11 _Noreturn feature
 Configure miss: if you want to use PCRE2 for regular-expressions
 Configure miss: if you want to use PCRE2 for regular-expressions
-Configure miss: if you want to use PCRE2 for regular-expressions
 Configure miss: if you want to use dbmalloc for testing
 Configure miss: if you want to use dbmalloc for testing
 Configure miss: if you want to use dbmalloc for testing
