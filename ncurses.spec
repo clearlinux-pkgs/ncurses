@@ -10,7 +10,7 @@
 %define keepstatic 1
 Name     : ncurses
 Version  : 6.5.20241102
-Release  : 155
+Release  : 156
 URL      : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.5-20241102.tgz
 Source0  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.5-20241102.tgz
 Source1  : https://invisible-mirror.net/archives/ncurses/current/ncurses-6.5-20241102.tgz.asc
